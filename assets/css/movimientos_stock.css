@@ -1,0 +1,100 @@
+/* =========================
+   MOVIMIENTOS DE STOCK
+========================= */
+
+.movimientos-card{
+    background:#fff;
+    padding:24px;
+    border-radius:16px;
+    box-shadow:0 2px 8px rgba(0,0,0,.05);
+}
+
+.movimientos-card h2{
+    margin-bottom:20px;
+    color:#0f172a;
+    font-size:24px;
+    font-weight:700;
+}
+
+.tabla-stock{
+    width:100%;
+    border-collapse:collapse;
+    background:#fff;
+}
+
+.tabla-stock thead{
+    background:#f8fafc;
+}
+
+.tabla-stock th{
+    padding:14px;
+    text-align:left;
+    font-weight:600;
+    color:#334155;
+    border-bottom:2px solid #e2e8f0;
+}
+
+.tabla-stock td{
+    padding:14px;
+    border-bottom:1px solid #e2e8f0;
+}
+
+.tabla-stock tr:hover{
+    background:#f8fafc;
+}
+
+.entrada{
+    color:#16a34a;
+    font-weight:600;
+}
+
+.salida{
+    color:#dc2626;
+    font-weight:600;
+}
+
+/* ==========================
+   FILTRO FECHAS
+========================== */
+
+.filtro-fechas{
+    display:flex;
+    gap:15px;
+    align-items:end;
+    margin-bottom:20px;
+    flex-wrap:wrap;
+}
+
+.campo-filtro{
+    display:flex;
+    flex-direction:column;
+}
+
+.campo-filtro label{
+    margin-bottom:6px;
+    font-size:14px;
+    font-weight:600;
+}
+
+.campo-filtro input{
+    padding:10px;
+    border:1px solid #cbd5e1;
+    border-radius:8px;
+}
+
+.btn-filtrar{
+    background:#0061f2;
+    color:white;
+    border:none;
+    padding:10px 16px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.btn-limpiar{
+    background:#64748b;
+    color:white;
+    text-decoration:none;
+    padding:10px 16px;
+    border-radius:8px;
+}

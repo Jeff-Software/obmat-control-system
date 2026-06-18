@@ -1,0 +1,23 @@
+# Carpetas de librerías externas (Ya las tienes, no necesitas subirlas)
+/fpdf/
+/libs/
+
+# Archivos de configuración local (pueden contener contraseñas de DB)
+/config/conexion.php
+
+# Archivos de sistema y temporales
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+
+# Archivos PDF generados dinámicamente
+/admin/*.pdf
+
+.vscode/
+vendor/
+node_modules/
+
+# Archivos de respaldo
+*.zip
+*.rar
