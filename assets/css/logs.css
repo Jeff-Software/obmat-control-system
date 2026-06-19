@@ -16,34 +16,37 @@
 
 .logs-kpis{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:20px;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
+    margin-bottom:20px;
 }
 
 .log-card{
-    background:#fff;
-    border-radius:16px;
-    padding:22px;
+    background:#ffffff;
+    border-radius:14px;
+    padding:16px 18px;
     display:flex;
     align-items:center;
-    gap:18px;
+    gap:14px;
     border:1px solid #e2e8f0;
-    box-shadow:0 4px 12px rgba(0,0,0,.05);
-    transition:.2s;
+    box-shadow:0 2px 6px rgba(0,0,0,.04);
+    transition:all .2s ease;
 }
 
 .log-card:hover{
-    transform:translateY(-3px);
+    transform:translateY(-2px);
+    box-shadow:0 6px 14px rgba(0,0,0,.08);
 }
 
 .card-icon{
-    width:55px;
-    height:55px;
-    border-radius:14px;
+    width:42px;
+    height:42px;
+    border-radius:10px;
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:22px;
+    font-size:17px;
+    flex-shrink:0;
 }
 
 .total .card-icon{
@@ -77,16 +80,17 @@
 }
 
 .log-card span{
-    font-size:13px;
+    font-size:12px;
     color:#64748b;
+    display:block;
+    margin-bottom:4px;
 }
 
 .log-card h3{
-    font-size:34px;
-    margin-top:6px;
+    font-size:24px;
     color:#0f172a;
-    font-weight:800;
-    letter-spacing:-1px;
+    font-weight:700;
+    margin:0;
 }
 
 /* BUSCADOR */
@@ -276,8 +280,13 @@ body{
     font-weight:600;
 }
 
-.edit{
-    border-left:5px solid #7c3aed;
+.edit,
+.update,
+.logout,
+.login,
+.create,
+.total{
+    border-left-width:3px;
 }
 
 .update{

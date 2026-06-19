@@ -1,0 +1,115 @@
+.productos-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.productos-table th,
+.productos-table td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.productos-table th {
+    background-color: #f8fafc;
+    font-weight: 600;
+}
+
+.btn-edit,
+.btn-delete,
+.btn-add {
+    padding: 6px 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 13px;
+    display: inline-block;
+    margin: 0 4px;
+}
+
+.btn-edit {
+    background: #3b82f6;
+    color: white;
+}
+
+.btn-delete {
+    background: #ef4444;
+    color: white;
+}
+
+.btn-add {
+    background: #10b981;
+    color: white;
+    margin-bottom: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.form-agregar {
+    background: white;
+    padding: 20px;
+    border-radius: 16px;
+    margin-bottom: 30px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.form-agregar input,
+.form-agregar textarea,
+.form-agregar select {
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+}
+
+.form-agregar button {
+    background: #0061f2;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.input-imagen {
+    width: 100%;
+    padding: 10px;
+    border: 2px dashed #cbd5e1;
+    border-radius: 12px;
+    background: #f8fafc;
+    color: #475569;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.input-imagen:hover {
+    border-color: #0061f2;
+    background: #eff6ff;
+}
+
+/* Estilo del botón interno */
+.input-imagen::file-selector-button {
+    background: #0061f2;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    margin-right: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.input-imagen::file-selector-button:hover {
+    background: #004ec2;
+}

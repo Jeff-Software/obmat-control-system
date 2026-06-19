@@ -64,31 +64,57 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['agregar'])) {
     }
     $stmt->close();
 }
+// Configuración de paginación
+$productosPorPagina = 5;
 
-// Obtener todos los productos
-// Fíjate bien en el WHERE estado = 1
-$productos = $conexion->query("SELECT * FROM productos WHERE estado = 1 ORDER BY nombre")->fetch_all(MYSQLI_ASSOC);?>
+// Página actual
+$pagina = isset($_GET['pagina']) ? intval($_GET['pagina']) : 1;
+
+if ($pagina < 1) {
+    $pagina = 1;
+}
+
+// Contar total de productos activos
+$totalProductos = $conexion
+    ->query("SELECT COUNT(*) AS total FROM productos WHERE estado = 1")
+    ->fetch_assoc()['total'];
+
+// Calcular total de páginas
+$totalPaginas = ceil($totalProductos / $productosPorPagina);
+
+// Evitar páginas mayores al límite
+if ($pagina > $totalPaginas && $totalPaginas > 0) {
+    $pagina = $totalPaginas;
+}
+
+// Calcular desde qué registro iniciar
+$inicio = ($pagina - 1) * $productosPorPagina;
+
+
+// Obtener productos de la página actual
+$query = "
+    SELECT *
+    FROM productos
+    WHERE estado = 1
+    ORDER BY nombre
+    LIMIT $inicio, $productosPorPagina
+";
+
+$productos = $conexion
+    ->query($query)
+    ->fetch_all(MYSQLI_ASSOC);
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Gestión de Artículos - Admin</title>
     <link rel="stylesheet" href="../assets/css/admin.css">
+    <link rel="stylesheet" href="../assets/css/articulos.css">
+    <link rel="stylesheet" href="../assets/css/paginacion.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        .productos-table { width: 100%; border-collapse: collapse; background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-        .productos-table th, .productos-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid #e2e8f0; }
-        .productos-table th { background-color: #f8fafc; font-weight: 600; }
-        .btn-edit, .btn-delete, .btn-add { padding: 6px 12px; border-radius: 8px; text-decoration: none; font-size: 13px; display: inline-block; margin: 0 4px; }
-        .btn-edit { background: #3b82f6; color: white; }
-        .btn-delete { background: #ef4444; color: white; }
-        .btn-add { background: #10b981; color: white; margin-bottom: 20px; border: none; cursor: pointer; }
-        .form-agregar { background: white; padding: 20px; border-radius: 16px; margin-bottom: 30px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-        .form-agregar input, .form-agregar textarea, .form-agregar select { width: 100%; padding: 8px; margin: 8px 0; border: 1px solid #cbd5e1; border-radius: 8px; }
-        .form-agregar button { background: #0061f2; color: white; border: none; padding: 10px; border-radius: 8px; cursor: pointer; }
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    </style>
 </head>
 <body>
     <?php include('../modulos/sidebar.php'); ?>
@@ -108,7 +134,7 @@ $productos = $conexion->query("SELECT * FROM productos WHERE estado = 1 ORDER BY
                 <input type="number" name="stock_minimo" placeholder="Stock mínimo" required>
                 
                 <input type="text" name="categoria" placeholder="Categoría">
-                <input type="file" name="imagen">
+                <input type="file" name="imagen" class="input-imagen">
                 
                 <textarea name="descripcion" placeholder="Descripción" style="grid-column: span 2;"></textarea>
                 <button type="submit" name="agregar" style="grid-column: span 2;">Agregar producto</button>
@@ -161,6 +187,33 @@ $productos = $conexion->query("SELECT * FROM productos WHERE estado = 1 ORDER BY
                 <?php endforeach; ?>
             </tbody>
         </table>
+        <div class="paginacion">
+
+<?php if ($pagina > 1): ?>
+    <a href="?pagina=<?= $pagina - 1 ?>">
+        ← Anterior
+    </a>
+<?php endif; ?>
+
+
+<?php for ($i = 1; $i <= $totalPaginas; $i++): ?>
+
+    <a 
+        href="?pagina=<?= $i ?>"
+        class="<?= ($i == $pagina) ? 'activa' : '' ?>">
+        <?= $i ?>
+    </a>
+
+<?php endfor; ?>
+
+
+<?php if ($pagina < $totalPaginas): ?>
+    <a href="?pagina=<?= $pagina + 1 ?>">
+        Siguiente →
+    </a>
+<?php endif; ?>
+
+</div>
     </main>
     <?php if (isset($_GET['success'])): ?>
             <script>

@@ -8,6 +8,17 @@ if (!isset($_SESSION['usuario'])) {
 
 require_once('../config/conexion.php');
 
+// Paginación
+$registrosPorPagina = 8;
+
+$pagina = isset($_GET['pagina']) 
+    ? intval($_GET['pagina']) 
+    : 1;
+
+if ($pagina < 1) {
+    $pagina = 1;
+}
+
 $where = [];
 
 if (!empty($_GET['desde'])) {
@@ -23,6 +34,38 @@ if (!empty($_GET['hasta'])) {
 
     $where[] = "DATE(m.fecha) <= '$hasta'";
 }
+
+// Construir condición WHERE
+$whereSQL = "";
+
+if (!empty($where)) {
+    $whereSQL = " WHERE " . implode(" AND ", $where);
+}
+
+// Contar registros
+$queryTotal = "
+SELECT COUNT(*) AS total
+FROM movimientos_stock m
+INNER JOIN productos p
+ON m.producto_id = p.id
+$whereSQL
+";
+
+$totalRegistros = $conexion
+    ->query($queryTotal)
+    ->fetch_assoc()['total'];
+
+$totalPaginas = ceil($totalRegistros / $registrosPorPagina);
+
+
+// Evitar páginas inexistentes
+if ($pagina > $totalPaginas && $totalPaginas > 0) {
+    $pagina = $totalPaginas;
+}
+
+
+// Offset
+$inicio = ($pagina - 1) * $registrosPorPagina;
 
 $query = "
 SELECT
@@ -42,7 +85,10 @@ if (!empty($where)) {
     $query .= " WHERE " . implode(" AND ", $where);
 }
 
-$query .= " ORDER BY m.fecha DESC";
+$query .= "
+ORDER BY m.fecha DESC
+LIMIT $inicio, $registrosPorPagina
+";
 
 $resultado = $conexion->query($query);
 ?>
@@ -55,6 +101,7 @@ $resultado = $conexion->query($query);
 
 <link rel="stylesheet" href="../assets/css/admin.css">
 <link rel="stylesheet" href="../assets/css/movimientos_stock.css">
+<link rel="stylesheet" href="../assets/css/paginacion.css">
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -141,6 +188,41 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
             </tbody>
 
         </table>
+<?php if ($totalPaginas > 1): ?>
+
+<div class="paginacion">
+
+    <!-- Botón anterior -->
+    <?php if ($pagina > 1): ?>
+        <a href="?pagina=<?= $pagina - 1 ?>&desde=<?= $_GET['desde'] ?? '' ?>&hasta=<?= $_GET['hasta'] ?? '' ?>">
+            «
+        </a>
+    <?php endif; ?>
+
+
+    <!-- Números de página -->
+    <?php for ($i = 1; $i <= $totalPaginas; $i++): ?>
+
+        <a 
+            class="<?= $i == $pagina ? 'activa' : '' ?>"
+            href="?pagina=<?= $i ?>&desde=<?= $_GET['desde'] ?? '' ?>&hasta=<?= $_GET['hasta'] ?? '' ?>">
+            <?= $i ?>
+        </a>
+
+    <?php endfor; ?>
+
+
+    <!-- Botón siguiente -->
+    <?php if ($pagina < $totalPaginas): ?>
+        <a href="?pagina=<?= $pagina + 1 ?>&desde=<?= $_GET['desde'] ?? '' ?>&hasta=<?= $_GET['hasta'] ?? '' ?>">
+            »
+        </a>
+    <?php endif; ?>
+
+</div>
+
+<?php endif; ?>
+``        
 
     </div>
 

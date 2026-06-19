@@ -10,6 +10,13 @@ require_once('../config/conexion.php');
 
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
+$limite = 3;
+
+$pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+if ($pagina < 1) $pagina = 1;
+
+$inicio = ($pagina - 1) * $limite;
+
 if ($id <= 0) {
     die("ID de producto inválido");
 }
@@ -97,12 +104,24 @@ $stmtMov = $conexion->prepare("
     FROM movimientos_stock
     WHERE producto_id = ?
     ORDER BY fecha DESC
+    LIMIT ?, ?
 ");
 
-$stmtMov->bind_param("i", $id);
+$stmtMov->bind_param("iii", $id, $inicio, $limite);
 $stmtMov->execute();
 
 $resultMovimientos = $stmtMov->get_result();
+$stmtCount = $conexion->prepare("
+    SELECT COUNT(*) as total
+    FROM movimientos_stock
+    WHERE producto_id = ?
+");
+
+$stmtCount->bind_param("i", $id);
+$stmtCount->execute();
+
+$total = $stmtCount->get_result()->fetch_assoc()['total'];
+$total_paginas = ceil($total / $limite);
 ?>
 
 <!DOCTYPE html>
@@ -168,6 +187,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         </form>
         <hr>
 
+<div class="stock-history">
     <h3>Historial de movimientos</h3>
 
     <table class="tabla-movimientos">
@@ -203,6 +223,26 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
 
         </tbody>
     </table>
+
+    <div class="paginacion">
+
+    <?php if ($pagina > 1): ?>
+        <a href="?id=<?= $id ?>&pagina=<?= $pagina - 1 ?>">«</a>
+    <?php endif; ?>
+
+    <?php for ($i = 1; $i <= $total_paginas; $i++): ?>
+        <a href="?id=<?= $id ?>&pagina=<?= $i ?>"
+           class="<?= $i == $pagina ? 'activa' : '' ?>">
+            <?= $i ?>
+        </a>
+    <?php endfor; ?>
+
+    <?php if ($pagina < $total_paginas): ?>
+        <a href="?id=<?= $id ?>&pagina=<?= $pagina + 1 ?>">»</a>
+    <?php endif; ?>
+
+</div>
+    </div>
 
     </div>
 

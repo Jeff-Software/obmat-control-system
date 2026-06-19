@@ -3,6 +3,13 @@
 require_once('../config/conexion.php');
 require_once('../config/auth.php'); 
 
+$limite = 10; // usuarios por página
+
+$pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+if ($pagina < 1) $pagina = 1;
+
+$inicio = ($pagina - 1) * $limite;
+
 
 // Consulta ajustada a las columnas que REALMENTE existen en tu tabla
 $sql_kpis = "SELECT 
@@ -15,8 +22,14 @@ $result_kpis = $conexion->query($sql_kpis);
 $kpi = $result_kpis->fetch_assoc();
 
 // Consulta para obtener los usuarios
-$sql_usuarios = "SELECT * FROM usuarios ORDER BY id ASC";
+$sql_usuarios = "SELECT * FROM usuarios ORDER BY id ASC LIMIT $inicio, $limite";
 $result_usuarios = $conexion->query($sql_usuarios);
+
+$sql_total = "SELECT COUNT(*) as total FROM usuarios";
+$result_total = $conexion->query($sql_total);
+$total_usuarios = $result_total->fetch_assoc()['total'];
+
+$total_paginas = ceil($total_usuarios / $limite);
 
 // ... resto de tu código
 ?>
@@ -27,6 +40,7 @@ $result_usuarios = $conexion->query($sql_usuarios);
     <meta charset="UTF-8">
     <title>Gestión de Usuarios | InkaDigital</title>
     <link rel="stylesheet" href="../assets/css/admin.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="../assets/css/paginacion.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="pagina-usuarios">
@@ -182,6 +196,26 @@ $result_usuarios = $conexion->query($sql_usuarios);
                 <?php endif; ?>
             </tbody>
             </table>
+
+        <div class="paginacion">
+
+            <?php if ($pagina > 1): ?>
+                <a href="?pagina=<?php echo $pagina - 1; ?>">«</a>
+            <?php endif; ?>
+
+            <?php for ($i = 1; $i <= $total_paginas; $i++): ?>
+                <a href="?pagina=<?php echo $i; ?>"
+                class="<?php echo $i == $pagina ? 'activa' : ''; ?>">
+                    <?php echo $i; ?>
+                </a>
+            <?php endfor; ?>
+
+            <?php if ($pagina < $total_paginas): ?>
+                <a href="?pagina=<?php echo $pagina + 1; ?>">»</a>
+            <?php endif; ?>
+
+        </div>
+
         </div>
 
         <div class="info-footer" style="margin-top: 20px; padding: 15px; background: #f0f7ff; color: #0066cc; border-radius: 8px; font-size: 14px;">

@@ -1,0 +1,141 @@
+/* =========================
+   EDITAR PRODUCTO PAGE
+========================= */
+
+body {
+    background: #f8fafc;
+    font-family: 'Inter', sans-serif;
+}
+
+.main-content {
+    margin-left: 280px;
+    padding: 40px;
+    background: #f8fafc;
+
+    /* clave */
+    display: flex;
+    justify-content: center;
+}
+.edit-container {
+    background: white;
+    padding: 28px;
+    border-radius: 16px;
+
+    width: 100%;
+    max-width: 520px; /* 👈 más compacto */
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+}
+
+.edit-container h2 {
+    margin-bottom: 18px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #0f172a;
+    text-align: center; /* 👈 clave */
+}
+.form-group {
+    margin-bottom: 14px; /* menos espacio */
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 10px 12px; /* más compacto */
+    font-size: 13.5px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #0061f2;
+    box-shadow: 0 0 0 3px rgba(0,97,242,0.1);
+    outline: none;
+}
+
+.current-image {
+    margin-top: 10px;
+}
+
+.current-image img {
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+}
+
+.btn-save {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    background: #0061f2;
+    color: white;
+
+    border: none;
+    padding: 10px 16px;
+    border-radius: 10px;
+
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.btn-save:hover {
+    background: #004ec2;
+    transform: translateY(-1px);
+}
+
+/* =========================
+   BOTÓN CANCELAR PRO
+========================= */
+
+.btn-cancel {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    background: #f1f5f9;
+    color: #334155;
+
+    padding: 10px 16px;
+    border-radius: 10px;
+
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+
+    border: 1px solid #e2e8f0;
+
+    transition: all 0.2s ease;
+    white-space: nowrap; /* 👈 evita que se parta o crezca raro */
+}
+
+.btn-cancel:hover {
+    background: #e2e8f0;
+    border-color: #cbd5e1;
+    transform: translateY(-1px);
+}
+
+.main-product-edit {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: row; /* rompe el flex global */
+    width: calc(100% - 260px);
+    margin-left: 260px;
+    padding: 40px;
+    background: #f8fafc;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+
+    margin-top: 22px;
+    padding-top: 12px;
+    border-top: 1px solid #e2e8f0; /* 👈 look profesional */
+}

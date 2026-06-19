@@ -86,28 +86,14 @@ exit();
     <meta charset="UTF-8">
     <title>Editar Producto</title>
     <link rel="stylesheet" href="../assets/css/admin.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/producto_editar.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        .main-content { margin-left: 280px; padding: 30px; background: #f8fafc; min-height: 100vh; display: flex; justify-content: center; align-items: center; }
-        .edit-container { background: white; padding: 30px; border-radius: 24px; max-width: 600px; width: 100%; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        .edit-container h2 { margin-bottom: 24px; font-size: 24px; font-weight: 600; color: #0f172a; }
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 8px; font-weight: 500; color: #1e293b; }
-        .form-group input, .form-group textarea { width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 12px; font-size: 14px; }
-        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: #0061f2; box-shadow: 0 0 0 3px rgba(0,97,242,0.1); }
-        .current-image { margin-top: 10px; }
-        .current-image img { border-radius: 12px; border: 1px solid #e2e8f0; padding: 4px; background: white; }
-        .btn-save { background: #0061f2; color: white; border: none; padding: 12px 20px; border-radius: 12px; font-weight: 600; cursor: pointer; margin-right: 12px; }
-        .btn-save:hover { background: #004ec2; }
-        .btn-cancel { background: #e2e8f0; color: #1e293b; padding: 12px 20px; border-radius: 12px; text-decoration: none; font-weight: 500; display: inline-block; }
-        .btn-cancel:hover { background: #cbd5e1; }
-    </style>
 </head>
 <body>
     <?php include('../modulos/sidebar.php'); ?>
-    <main class="main-content">
+    <main class="main-content main-product-edit">
         <div class="edit-container">
             <h2><i class="fas fa-edit"></i> Editar producto</h2>
             <form method="POST" enctype="multipart/form-data">
@@ -137,16 +123,36 @@ exit();
                 </div>
                 <div class="form-group">
                     <label>Imagen</label>
-                    <input type="file" name="imagen" accept="image/*">
+                    <div class="file-upload">
+                        <input type="file" name="imagen" id="imagen" accept="image/*">
+                        <label for="imagen">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span>Subir imagen</span>
+                            <small>PNG, JPG, JPEG</small>
+                        </label>
+                    </div>
                     <div class="current-image">
                         <p>Imagen Producto:</p>
                         <img src="../assets/img/productos/<?= htmlspecialchars($prod['imagen'] ?? 'default.png') ?>" width="80">
                     </div>
                 </div>
-                <button type="submit" class="btn-save"><i class="fas fa-save"></i> Guardar cambios</button>
-                <a href="articulos.php" class="btn-cancel"><i class="fas fa-times"></i> Cancelar</a>
-            </form>
-        </div>
+            <div class="form-actions">
+                <button type="submit" class="btn-save">
+                    <i class="fas fa-save"></i> Guardar cambios
+                </button>
+
+                <a href="articulos.php" class="btn-cancel">
+                    <i class="fas fa-times"></i> Cancelar
+                </a>
+            </div>
+        <script>
+document.getElementById('imagen').addEventListener('change', function () {
+    const fileName = this.files[0]?.name;
+    if (fileName) {
+        this.nextElementSibling.querySelector('span').textContent = fileName;
+    }
+});
+</script>
     </main>
 </body>
 </html>

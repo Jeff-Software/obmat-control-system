@@ -1,11 +1,7 @@
 /* assets/css/style.css */
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #333;
     font-family: Arial, sans-serif;
+    background: #f8fafc;
 }
 
 .titulo-sistema {
@@ -101,3 +97,54 @@ button:hover {
     text-align:center;
 }
 
+/* =========================
+   INPUT FILE BONITO
+========================= */
+
+.file-upload {
+    position: relative;
+    width: 100%;
+}
+
+.file-upload input[type="file"] {
+    display: none;
+}
+
+.file-upload label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+    padding: 20px;
+
+    border: 2px dashed #cbd5e1;
+    border-radius: 10px;
+    background: #f8fafc;
+
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.file-upload label:hover {
+    border-color: #0066ff;
+    background: #eef5ff;
+    transform: translateY(-2px);
+}
+
+.file-upload i {
+    font-size: 26px;
+    color: #0066ff;
+}
+
+.file-upload span {
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.file-upload small {
+    color: #64748b;
+    font-size: 12px;
+}

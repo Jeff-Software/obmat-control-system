@@ -12,7 +12,7 @@ $fecha_hasta = $_GET['fecha_hasta'] ?? date('Y-m-d');
 // PAGINACIÓN
 // =====================================
 
-$registros_por_pagina = 20;
+$registros_por_pagina = 10;
 
 $pagina = isset($_GET['pagina'])
     ? (int)$_GET['pagina']
