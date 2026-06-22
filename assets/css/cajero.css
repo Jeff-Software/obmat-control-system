@@ -597,3 +597,208 @@ body {
     color:white;
     font-size:24px;
 }
+
+.btn-lista {
+    background: linear-gradient(135deg, #6366f1, #3b82f6);
+    color: #fff;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 10px rgba(59, 130, 246, 0.25);
+}
+
+.btn-lista i {
+    font-size: 14px;
+}
+
+.btn-lista:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(59, 130, 246, 0.35);
+}
+
+.btn-lista:active {
+    transform: scale(0.97);
+}
+
+.btn-volver {
+    background: #f1f5f9;
+    color: #0f172a;
+    border: 1px solid #e2e8f0;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-volver:hover {
+    background: #e2e8f0;
+    transform: translateX(-2px);
+}
+
+.btn-volver:active {
+    transform: scale(0.97);
+}
+/* =========================
+   VENTAS EN ESPERA
+========================= */
+
+
+.acciones{
+    display:flex;
+    gap:8px;
+    justify-content:center;
+}
+
+
+.acciones button{
+
+    border:none;
+    padding:8px 14px;
+
+    border-radius:8px;
+
+    color:white;
+
+    cursor:pointer;
+
+    font-size:13px;
+
+    display:flex;
+    align-items:center;
+    gap:6px;
+
+    transition:.2s;
+
+}
+
+
+
+/* recuperar */
+
+.btn-recuperar{
+
+    background:#2563eb;
+
+}
+
+
+.btn-recuperar:hover{
+
+    background:#1d4ed8;
+
+    transform:translateY(-2px);
+
+}
+
+
+
+/* eliminar */
+
+.btn-eliminar{
+
+    background:#dc2626;
+
+}
+
+
+.btn-eliminar:hover{
+
+    background:#b91c1c;
+
+    transform:translateY(-2px);
+
+}
+
+
+
+
+/* imprimir */
+
+.btn-imprimir{
+
+    background:#16a34a;
+
+}
+
+
+.btn-imprimir:hover{
+
+    background:#15803d;
+
+    transform:translateY(-2px);
+
+}
+
+
+
+/* tabla */
+
+
+.tabla-carrito table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+
+
+.tabla-carrito th{
+
+
+    background:#111827;
+
+    color:white;
+
+    padding:12px;
+
+    text-align:center;
+
+}
+
+
+
+.tabla-carrito td{
+
+    padding:12px;
+
+    border-bottom:1px solid #ddd;
+
+    text-align:center;
+
+}
+
+
+
+
+.tabla-carrito tr:hover{
+
+    background:#f8fafc;
+
+}
+
+
+
+/* mensaje vacio */
+
+.carrito-vacio{
+
+    padding:25px;
+
+    color:#64748b;
+
+    font-size:16px;
+
+}

@@ -28,7 +28,7 @@ try {
     if (empty($carrito) || empty($metodo_pago)) {
         echo json_encode([
             'success' => false,
-            'mensaje' => 'Datos incompletos'
+            'mensaje' => __('datos_incompletos')
         ]);
         exit();
     }
@@ -49,7 +49,7 @@ try {
     if (!$user) {
         echo json_encode([
             'success' => false,
-            'mensaje' => 'Usuario no encontrado'
+            'mensaje' => __('usuario_no_encontrado')
         ]);
         exit();
     }
@@ -79,19 +79,19 @@ try {
 
         if (!$producto) {
             throw new Exception(
-                "Producto no encontrado"
+                "__('producto_no_encontrado')"
             );
         }
 
         if ($producto['estado'] == 0) {
             throw new Exception(
-                "El producto '" . $producto['nombre'] . "' está inactivo"
+                "El producto '" . $producto['nombre'] . "' __('producto_inactivo')"
             );
         }
 
         if ($producto['stock'] < $item['cantidad']) {
             throw new Exception(
-                "Stock insuficiente para: " . $producto['nombre']
+                "__('stock_insuficiente'): " . $producto['nombre']
             );
         }
     }

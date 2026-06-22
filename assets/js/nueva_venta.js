@@ -13,7 +13,10 @@ buscador.addEventListener('input', function () {
         .then(r => r.json())
         .then(productos => {
             if (productos.length === 0) {
-                listaResultados.innerHTML = '<div style="padding:15px;color:#94a3b8;text-align:center;">No se encontraron productos</div>';
+                listaResultados.innerHTML = `
+                <div style="padding:15px;color:#94a3b8;text-align:center;">
+                    ${LANG.noProductos}
+                </div>`;
             } else {
                 listaResultados.innerHTML = productos.map(p => `
                     <div class="item-resultado" onclick="agregarAlCarrito(${p.id}, '${escapar(p.nombre)}', ${p.precio}, '${escapar(p.imagen)}')">
@@ -66,7 +69,12 @@ function agregarAlCarrito(id, nombre, precio, imagen) {
 function renderCarrito() {
     const tbody = document.getElementById('carrito-body');
     if (carrito.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="5" class="carrito-vacio">Busca un producto para agregarlo</td></tr>`;
+        tbody.innerHTML = `
+        <tr>
+            <td colspan="5" class="carrito-vacio">
+                ${LANG.buscarProducto}
+            </td>
+        </tr>`;
         document.getElementById('btn-cobrar').disabled = true;
     } else {
         tbody.innerHTML = carrito.map((p, i) => `
@@ -139,7 +147,7 @@ function cancelarVenta() {
     if (
         CONFIG_SISTEMA.confirmarCancelarVenta &&
         carrito.length > 0 &&
-        !confirm('¿Seguro que deseas cancelar la venta?')
+        !confirm(LANG.confirmarCancelar)
     ) {
         return;
     }
@@ -175,7 +183,7 @@ function confirmarVenta() {
     procesando = true;
 
     if (!metodoPago) {
-        alert('Por favor selecciona un método de pago');
+        alert(LANG.seleccionarPago);
         procesando = false;
         return;
     }
@@ -210,7 +218,7 @@ function confirmarVenta() {
                 renderCarrito();
 
                 const msg = document.createElement('div');
-                msg.textContent = '✅ Venta registrada correctamente';
+                msg.textContent = '✅ ' + LANG.ventaCorrecta;
                 msg.style.cssText = 'position:fixed;top:20px;right:20px;background:#16a34a;color:#fff;padding:15px 25px;border-radius:10px;font-weight:600;z-index:999;';
                 document.body.appendChild(msg);
 
@@ -224,7 +232,7 @@ function confirmarVenta() {
         })
         .catch(error => {
             console.error(error);
-            alert('Error al procesar la venta');
+            alert(LANG.errorVenta);
         })
         .finally(() => {
             procesando = false;
@@ -234,7 +242,7 @@ function confirmarVenta() {
 
 function ponerEnEsperaDesdeVenta() {
     if (carrito.length === 0) {
-        alert('No hay productos en el carrito');
+        alert(LANG.carritoVacio);
         return;
     }
     const venta = {
@@ -251,7 +259,7 @@ function ponerEnEsperaDesdeVenta() {
     renderCarrito();
 
     const msg = document.createElement('div');
-    msg.textContent = '✅ Venta guardada en espera';
+    msg.textContent = '✅ ' + LANG.ventaEspera;
     msg.style.cssText = 'position:fixed;top:20px;right:20px;background:#f59e0b;color:#fff;padding:15px 25px;border-radius:10px;font-weight:600;z-index:999;';
     document.body.appendChild(msg);
     setTimeout(() => msg.remove(), 3000);

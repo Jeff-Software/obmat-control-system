@@ -2,28 +2,54 @@
 // Consulta para obtener ventas por día (forzando los 7 días de la semana)
 $query_dia = "SELECT 
                 dias.nombre AS dia, 
-                COALESCE(SUM(v.total), 0) AS total_dia
+                COALESCE(SUM(v.total), 0) AS total_dia,
+                dias.ord
               FROM (
-                SELECT 'Lun' AS nombre, 2 AS ord UNION SELECT 'Mar', 3 UNION 
-                SELECT 'Mié', 4 UNION SELECT 'Jue', 5 UNION SELECT 'Vie', 6 UNION 
-                SELECT 'Sáb', 7 UNION SELECT 'Dom', 1
+                SELECT 'lunes' AS nombre, 2 AS ord UNION 
+                SELECT 'martes', 3 UNION 
+                SELECT 'miercoles', 4 UNION 
+                SELECT 'jueves', 5 UNION 
+                SELECT 'viernes', 6 UNION 
+                SELECT 'sabado', 7 UNION 
+                SELECT 'domingo', 1
               ) AS dias
-              LEFT JOIN ventas v ON ELT(WEEKDAY(v.fecha) + 1, 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom') = dias.nombre
-              WHERE v.fecha >= DATE_SUB(CURDATE(), INTERVAL 7 DAY) OR v.fecha IS NULL
+
+              LEFT JOIN ventas v 
+              ON ELT(
+                    WEEKDAY(v.fecha) + 1,
+                    'lunes',
+                    'martes',
+                    'miercoles',
+                    'jueves',
+                    'viernes',
+                    'sabado',
+                    'domingo'
+              ) = dias.nombre
+
+              WHERE v.fecha >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+              OR v.fecha IS NULL
+
               GROUP BY dias.nombre, dias.ord
+
               ORDER BY dias.ord ASC";
 
 $result = $conexion->query($query_dia);
 $labels = [];
 $totales = [];
 while($row = $result->fetch_assoc()) {
-    $labels[] = $row['dia'];
+
+    $dia = $row['dia'];
+
+    $labels[] = $lang['dias_semana'][$dia] ?? $dia;
+
     $totales[] = (float)$row['total_dia'];
 }
 ?>
 
 <div class="chart-container">
-    <h3 style="margin-bottom: 20px;">Ventas por día de la semana</h3>
+    <h3 style="margin-bottom:20px;">
+    <?= __('ventas_dia_semana') ?>
+    </h3>
     <canvas id="chartDiaSemana"></canvas>
 </div>
 

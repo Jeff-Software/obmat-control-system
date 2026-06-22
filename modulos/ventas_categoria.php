@@ -4,7 +4,7 @@
 // CONSULTA SQL: Suma el total vendido agrupado por categorías de productos en el día de hoy
 $query_cat = "
             SELECT
-                p.categoria,
+            LOWER(p.categoria) AS categoria,
                 SUM(dv.cantidad * dv.precio_unitario) AS total_vendido
             FROM detalle_ventas dv
             INNER JOIN productos p
@@ -61,17 +61,17 @@ unset($item);
 
 // Definición de colores fijos según el orden de tu maqueta
 $colores_map = [
-    'Abarrotes' => '#0061f2', // Azul
-    'Lácteos' => '#2563eb',   // Azul intermedio
-    'Bebidas' => '#38bdf8',   // Celeste claro
-    'Higiene' => '#10b981',   // Verde
-    'Otros' => '#cbd5e1'     // Gris
+    'abarrotes' => '#0061f2',
+    'lacteos'    => '#2563eb',
+    'bebidas'    => '#38bdf8',
+    'higiene'    => '#10b981',
+    'otros'      => '#cbd5e1'
 ];
 ?>
 
 <div class="dashboard-card summary-box">
     <div class="card-header-clean">
-        <h3>Ventas por categoría</h3>
+        <h3><?= __('ventas_por_categoria') ?></h3>
     </div>
     
     <div class="category-chart-layout">
@@ -86,7 +86,9 @@ $colores_map = [
                 <div class="category-legend-row">
                     <div class="cat-label-group">
                         <span class="cat-color-dot" style="background-color: <?php echo $color; ?>;"></span>
-                        <span class="cat-name"><?php echo htmlspecialchars($cat['nombre']); ?></span>
+                        <span class="cat-name">
+                            <?= __(strtolower($cat['nombre'])) ?>
+                        </span>
                     </div>
                     <span class="cat-percentage"><?php echo $cat['porcentaje']; ?>%</span>
                     <span class="cat-value">

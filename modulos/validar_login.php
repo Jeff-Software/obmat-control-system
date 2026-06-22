@@ -1,5 +1,6 @@
 <?php
 require_once('../config/conexion.php');
+require_once('../config/config_global.php');
 require_once('../config/logs.php');
 session_start();
 
@@ -20,7 +21,7 @@ $result = $stmt->get_result();
 if ($user = $result->fetch_assoc()) {
 
     // Verificar si el usuario está activo
-    if ($user['estado'] != 'Activo') {
+    if ($user['estado'] !== 'Activo') {
 
         header("Location: ../index.php?error=inactivo");
         exit();
@@ -43,7 +44,18 @@ if (password_verify($pass, $user['password'])) {
         $_SESSION['rol'] = $user['rol'];
         $_SESSION['caja'] = $user['caja_asignada'];
 
-        $_SESSION['ultimo_acceso'] = date('d/m/Y - H:i A');
+        if (!empty($user['ultimo_acceso'])) {
+
+            $_SESSION['ultimo_acceso'] = date(
+                'd/m/Y - h:i A',
+                strtotime($user['ultimo_acceso'])
+            );
+
+        } else {
+
+            $_SESSION['ultimo_acceso'] = "Primer acceso";
+
+        }
 
         $sql_update = "UPDATE usuarios SET ultimo_acceso = NOW() WHERE id = ?";
         $stmt_upd = $conexion->prepare($sql_update);

@@ -39,19 +39,22 @@ $total_criticos = count($productos_criticos);
 
         <div>
 
-            <p class="alert-text-content">
-                Hay <strong><?php echo $total_criticos; ?> productos</strong>
-                que alcanzaron su stock mínimo.
-            </p>
+        <p class="alert-text-content">
+            <?= str_replace(':count', $total_criticos, __('stock_alerta')) ?>
+        </p>
 
             <ul style="margin-top:8px; padding-left:20px;">
 
                 <?php foreach($productos_criticos as $producto){ ?>
 
-                    <li>
-                        <?php echo htmlspecialchars($producto['nombre']); ?>
-                        (<?php echo $producto['stock']; ?>/<?php echo $producto['stock_minimo']; ?>)
-                    </li>
+                <li>
+                    <?= htmlspecialchars($producto['nombre']); ?>
+                    (<?= str_replace(
+                        [':current', ':min'],
+                        [$producto['stock'], $producto['stock_minimo']],
+                        __('stock_formato')
+                    ) ?>)
+                </li>
 
                 <?php } ?>
 
@@ -62,7 +65,7 @@ $total_criticos = count($productos_criticos);
     </div>
 
     <a href="articulos.php" class="btn-alert-action">
-        Ver inventario
+        <?= __('ver_inventario') ?>
     </a>
 
 </div>

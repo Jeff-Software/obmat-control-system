@@ -84,7 +84,7 @@ exit();
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Editar Producto</title>
+    <title><?= __('editar_producto') ?></title>
     <link rel="stylesheet" href="../assets/css/admin.css">
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/producto_editar.css">
@@ -95,54 +95,57 @@ exit();
     <?php include('../modulos/sidebar.php'); ?>
     <main class="main-content main-product-edit">
         <div class="edit-container">
-            <h2><i class="fas fa-edit"></i> Editar producto</h2>
+            <h2>
+            <i class="fas fa-edit"></i>
+            <?= __('editar_producto') ?>
+            </h2>
             <form method="POST" enctype="multipart/form-data">
                 <div class="form-group">
-                    <label>Nombre</label>
+                    <label><?= __('nombre') ?></label>
                     <input type="text" name="nombre" value="<?= htmlspecialchars($prod['nombre']) ?>" required>
                 </div>
                 <div class="form-group">
-                    <label>Precio (<?= $simboloMoneda ?>)</label>
+                    <label><?= __('precio') ?> (<?= $simboloMoneda ?>)</label>
                     <input type="number" step="0.01" name="precio" value="<?= $prod['precio'] ?>" required>
                 </div>
                 <div class="form-group">
-                    <label>Stock</label>
+                    <label><?= __('stock') ?></label>
                     <input type="number" name="stock" value="<?= $prod['stock'] ?>" required>
                 </div>
                 <div class="form-group">
-                    <label>Stock mínimo</label>
+                    <label><?= __('stock_minimo') ?></label>
                     <input type="number" name="stock_minimo" value="<?= $prod['stock_minimo'] ?>" required>
                 </div>
                 <div class="form-group">
-                    <label>Categoría</label>
+                    <label><?= __('categoria') ?></label>
                     <input type="text" name="categoria" value="<?= htmlspecialchars($prod['categoria']) ?>" required>
                 </div>
                 <div class="form-group">
-                    <label>Descripción</label>
+                    <label><?= __('descripcion') ?></label>
                     <textarea name="descripcion" rows="3"><?= htmlspecialchars($prod['descripcion'] ?? '') ?></textarea>
                 </div>
                 <div class="form-group">
-                    <label>Imagen</label>
+                    <label><?= __('imagen') ?></label>
                     <div class="file-upload">
                         <input type="file" name="imagen" id="imagen" accept="image/*">
                         <label for="imagen">
                             <i class="fas fa-cloud-upload-alt"></i>
-                            <span>Subir imagen</span>
-                            <small>PNG, JPG, JPEG</small>
+                            <span><?= __('subir_imagen') ?></span>
+                            <small><?= __('formatos_imagen') ?></small>
                         </label>
                     </div>
                     <div class="current-image">
-                        <p>Imagen Producto:</p>
+                        <p><?= __('imagen_producto') ?>:</p>
                         <img src="../assets/img/productos/<?= htmlspecialchars($prod['imagen'] ?? 'default.png') ?>" width="80">
                     </div>
                 </div>
             <div class="form-actions">
                 <button type="submit" class="btn-save">
-                    <i class="fas fa-save"></i> Guardar cambios
+                    <i class="fas fa-save"></i> <?= __('guardar_cambios') ?>
                 </button>
 
                 <a href="articulos.php" class="btn-cancel">
-                    <i class="fas fa-times"></i> Cancelar
+                    <i class="fas fa-times"></i> <?= __('cancelar') ?>
                 </a>
             </div>
         <script>

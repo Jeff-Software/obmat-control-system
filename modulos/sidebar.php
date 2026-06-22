@@ -18,38 +18,38 @@ if (!isset($pagina_actual)) {
             class="sidebar-logo">
     </div>
 
-    <span class="menu-title">MENÚ ADMINISTRADOR</span>
+    <span class="menu-title"><?= __('menu_admin') ?></span>
 
     <nav class="sidebar-menu">
         <a href="../admin/dashboard_admin.php" class="menu-item">
-            <i class="fas fa-th-large"></i> Dashboard
+            <i class="fas fa-th-large"></i> <?= __('dashboard') ?>
         </a>
         <a href="../admin/ventas.php" class="menu-item">
-            <i class="fas fa-shopping-cart"></i> Ventas
+            <i class="fas fa-shopping-cart"></i> <?= __('ventas') ?>
         </a>
         
         <a href="../admin/analisis.php" class="menu-item">
-            <i class="fas fa-chart-line"></i> Análisis
+            <i class="fas fa-chart-line"></i> <?= __('analisis') ?>
         </a>
 
         <a href="../admin/movimientos_stock.php" class="menu-item">
-            <i class="fas fa-exchange-alt"></i> Movimientos
+            <i class="fas fa-exchange-alt"></i> <?= __('movimientos') ?>
         </a>
         <a href="../admin/articulos.php" class="menu-item">
-            <i class="fas fa-box"></i> Artículos
+            <i class="fas fa-box"></i> <?= __('articulos') ?>
         </a>
         <a href="../admin/reportes.php" class="menu-item">
-            <i class="fas fa-file-alt"></i> Reportes
+            <i class="fas fa-file-alt"></i> <?= __('reportes') ?>
         </a>
 
         <a href="../admin/logs.php" class="menu-item">
-            <i class="fas fa-clipboard-list"></i> Auditoría
+            <i class="fas fa-clipboard-list"></i> <?= __('auditoria') ?>
         </a>
         <a href="../admin/usuarios.php" class="menu-item">
-            <i class="fas fa-users"></i> Usuarios
+            <i class="fas fa-users"></i> <?= __('usuarios') ?>
         </a>
         <a href="../admin/configuracion.php" class="menu-item">
-            <i class="fas fa-cog"></i> Configuración
+            <i class="fas fa-cog"></i> <?= __('configuracion') ?>
         </a>
     </nav>
 
@@ -71,13 +71,17 @@ if (!isset($pagina_actual)) {
 </span>
         </div>
         <div class="profile-status">
-            <span class="status-dot"></span> En línea
+            <span class="status-dot"></span> <?= __('en_linea') ?>
         </div>
         <div class="profile-access">
-            Último acceso:<br>
-            <span><?php echo $_SESSION['ultimo_acceso'] ?? date('d/m/Y - H:i A'); ?></span>
+            <?= __('ultimo_acceso') ?>:<br>
+            <span>
+                <?= htmlspecialchars($_SESSION['ultimo_acceso'] ?? __('primer_acceso')) ?>
+            </span>
         </div>
-        <a href="../modulos/logout.php" class="btn-logout-sidebar"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+        <a href="../modulos/logout.php" class="btn-logout-sidebar">
+            <i class="fas fa-sign-out-alt"></i> <?= __('cerrar_sesion') ?>
+        </a>
     
     </div>
 </div>

@@ -1,6 +1,7 @@
 <?php
 require_once('../config/conexion.php');
-
+require_once('../config/config_global.php'); 
+/** @var array $configSistema */
 // =====================================
 // FILTROS
 // =====================================
@@ -86,15 +87,15 @@ $resultado = $stmt->get_result();
 <div class="content-wrapper">
     <form method="GET" class="filter-form">
         <div class="input-group">
-            <label>Fecha desde</label>
+            <label><?= __('fecha_desde') ?></label>
             <input type="date" name="fecha_desde" value="<?php echo $fecha_desde; ?>">
         </div>
         <div class="input-group">
-            <label>Fecha hasta</label>
+            <label><?= __('fecha_hasta') ?></label>
             <input type="date" name="fecha_hasta" value="<?php echo $fecha_hasta; ?>">
         </div>
-        <button type="submit" class="btn-filtrar">
-            <i class="fas fa-filter"></i> Filtrar
+        <button class="btn-filtrar">
+            <i class="fas fa-filter"></i> <?= __('filtrar') ?>
         </button>
     </form>
 
@@ -102,7 +103,12 @@ $resultado = $stmt->get_result();
         <table class="table-modern">
             <thead>
                 <tr>
-                    <th>ID</th><th>FECHA</th><th>CAJERO</th><th>TOTAL</th><th>MÉTODO</th><th>ACCIONES</th>
+                    <th><?= __('id') ?></th>
+                    <th><?= __('fecha') ?></th>
+                    <th><?= __('cajero') ?></th>
+                    <th><?= __('total') ?></th>
+                    <th><?= __('metodo') ?></th>
+                    <th><?= __('acciones') ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -119,11 +125,23 @@ $resultado = $stmt->get_result();
                     <td class="total-col">
                         <?php echo $simboloMoneda . ' ' . number_format($fila['total'], 2); ?>
                     </td>
-                    <td><span class="badge"><?php echo $fila['metodo_pago']; ?></span></td>
+                    <td>
+                    <span class="badge">
+
+                    <?php
+
+                    $metodo = strtolower($fila['metodo_pago']);
+
+                    echo __($metodo);
+
+                    ?>
+
+                    </span>
+                    </td>
                     <td>
                         <button class="btn-detalle"
                             onclick="abrirDetalle(<?php echo $fila['id']; ?>)">
-                            Ver detalle
+                            <?= __('ver_detalle') ?>
                         </button>
                     </td>
                 </tr>
@@ -135,7 +153,7 @@ $resultado = $stmt->get_result();
 
     <?php if($pagina > 1){ ?>
         <a href="?pagina=<?php echo $pagina-1; ?>&fecha_desde=<?php echo $fecha_desde; ?>&fecha_hasta=<?php echo $fecha_hasta; ?>">
-            ← Anterior
+            ← <?= __('anterior') ?>
         </a>
     <?php } ?>
 
@@ -152,7 +170,7 @@ $resultado = $stmt->get_result();
 
     <?php if($pagina < $totalPaginas){ ?>
         <a href="?pagina=<?php echo $pagina+1; ?>&fecha_desde=<?php echo $fecha_desde; ?>&fecha_hasta=<?php echo $fecha_hasta; ?>">
-            Siguiente →
+            <?= __('siguiente') ?> →
         </a>
     <?php } ?>
 
@@ -166,6 +184,27 @@ $resultado = $stmt->get_result();
         <div id="contenidoDetalle">Cargando...</div>
     </div>
 </div>
+
+<script>
+const LANG = {
+    total: "<?= __('total') ?>",
+    imprimir_ticket: "<?= __('imprimir_ticket') ?>",
+    vuelva_pronto: "<?= __('vuelva_pronto') ?>",
+    conserve_comprobante: "<?= __('conserve_comprobante') ?>",
+    producto: "<?= __('producto') ?>",
+    cantidad: "<?= __('cantidad') ?>",
+    precio_unitario: "<?= __('precio_unitario') ?>",
+    subtotal: "<?= __('subtotal') ?>",
+    cargando: "<?= __('cargando') ?>",
+    gracias_compra: "<?= __('gracias_compra') ?>",
+    fecha_ticket: "<?= __('fecha_ticket') ?>",
+    cajero_ticket: "<?= __('cajero_ticket') ?>",
+    pago_ticket: "<?= __('pago_ticket') ?>"
+
+};
+
+const SIMBOLO_MONEDA = "<?= $configSistema['simbolo'] ?>";
+</script>
 
 <script>
 function abrirDetalle(id) {
@@ -187,12 +226,12 @@ function abrirDetalle(id) {
             let html = `
                 <div style="text-align: center; border-bottom: 2px dashed #000; margin-bottom: 10px;">
                     <h3>${info.negocio}</h3>
-                    <p>¡Gracias por su compra!</p>
+                    <p>${LANG.gracias_compra}</p>
                 </div>
                 <div style="font-size: 0.9em; margin-bottom: 10px;">
-                    <p><strong>Fecha:</strong> ${info.fecha}</p>
-                    <p><strong>Cajero:</strong> ${info.cajero}</p>
-                    <p><strong>Método de pago:</strong> ${info.metodo ? info.metodo.toUpperCase() : 'N/A'}</p>
+                    <p><strong>${LANG.fecha_ticket}:</strong> ${info.fecha}</p>
+                    <p><strong>${LANG.cajero_ticket}:</strong> ${info.cajero}</p>
+                    <p><strong>${LANG.pago_ticket}:</strong> ${info.metodo ? info.metodo.toUpperCase() : 'N/A'}</p>
                 </div>
                 <table style="width:100%; border-top: 1px solid #000; border-bottom: 1px solid #000; border-collapse: collapse;">
                     <thead>
@@ -221,22 +260,22 @@ function abrirDetalle(id) {
 
             // Pie del ticket con el botón de imprimir integrado
             html += `</tbody></table>
-                     <div style="text-align: right; margin-top: 10px;">
-                        <h3>TOTAL: <?= $simboloMoneda ?> ${data.total}</h3>
-                     </div>
-                     
-                     <div style="text-align: center; margin-top: 20px;">
+                    <div style="text-align: right; margin-top: 10px;">
+                        <h3>${LANG.total}: ${SIMBOLO_MONEDA} ${data.total}</h3>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 20px;">
                         <a href="../modulos/generar_ticket.php?id=${id}" target="_blank"
-                           style="background: #28a745; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">
-                           <i class="fas fa-print"></i> Imprimir Ticket
+                        style="background: #28a745; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">
+                        <i class="fas fa-print"></i> ${LANG.imprimir_ticket}
                         </a>
-                     </div>
-                     
-                     <div style="text-align: center; margin-top: 20px; font-size: 0.8em;">
-                        <p>¡Vuelva pronto!</p>
-                        <p>Conserve su comprobante</p>
-                     </div>`;
-            
+                    </div>
+
+                    <div style="text-align: center; margin-top: 20px; font-size: 0.8em;">
+                        <p>${LANG.vuelva_pronto}</p>
+                        <p>${LANG.conserve_comprobante}</p>
+                    </div>`;
+                        
             // Finalmente, actualiza el modal
             container.innerHTML = html;
         })

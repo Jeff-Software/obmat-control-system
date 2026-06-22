@@ -22,7 +22,7 @@ $num_notif = $row_notif['total'] ?? 0;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel Administrador</title>
+    <title><?= __('dashboard') ?></title>
     <link rel="stylesheet" href="../assets/css/admin.css?v=<?php echo time(); ?>">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -36,8 +36,12 @@ $num_notif = $row_notif['total'] ?? 0;
         
         <header class="dashboard-header">
             <div class="dashboard-header-title-block">
-                <h2>¡Bienvenido, <?php echo htmlspecialchars($nombre_usuario); ?>!</h2>
-                <p>Resumen general de tu minimarket</p>
+            <h2>
+                <?= __('bienvenido') ?>,
+                <?= htmlspecialchars($nombre_usuario) ?>!
+            </h2>
+
+            <p><?= __('resumen_minimarket') ?></p>
             </div>
 
             <div class="header-user-actions" style="display: flex; align-items: center; gap: 20px;">
@@ -49,9 +53,11 @@ $num_notif = $row_notif['total'] ?? 0;
                     <?php endif; ?>
                     
                     <div id="notif-dropdown" class="notification-dropdown">
-                        <div class="notif-header">Notificaciones</div>
+                        <div class="notif-header">
+                            <?= __('notificaciones') ?>
+                        </div>
                         <div class="notif-list">
-                            <p style="padding: 10px; font-size: 12px; color: #666;">Tienes <?php echo $num_notif; ?> alertas nuevas.</p>
+                            <p style="padding: 10px; font-size: 12px; color: #666;"><?= __('tienes') ?> <?= $num_notif ?> <?= __('alertas_nuevas') ?></p>
                         </div>
                     </div>
                 </div>

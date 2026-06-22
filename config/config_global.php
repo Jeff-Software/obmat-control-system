@@ -42,3 +42,30 @@ if (!empty($configSistema['moneda'])) {
 }
 
 $configSistema['simbolo'] = $simboloMoneda;
+
+$idioma = $configSistema['idioma'] ?? 'es';
+
+$archivoIdioma = __DIR__ . "/../idiomas/$idioma.php";
+
+if (file_exists($archivoIdioma)) {
+
+    $lang = require $archivoIdioma;
+
+} else {
+
+    $lang = require __DIR__ . "/../idiomas/es.php";
+
+}
+
+function __($key, $replace = [])
+{
+    global $lang;
+
+    $text = $lang[$key] ?? $key;
+
+    foreach ($replace as $k => $v) {
+        $text = str_replace(":$k", $v, $text);
+    }
+
+    return $text;
+}

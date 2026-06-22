@@ -62,10 +62,10 @@ $mostrar_ayer = array_sum($ayer_data) > 0;
 
     <div class="chart-header-custom">
         <div>
-            <h3>Evolución de ventas del día</h3>
-            <small style="color:#64748b;">
-                Total hoy: <?= $simboloMoneda ?> <?php echo number_format($total_hoy, 2); ?>
-            </small>
+        <h3><?= __('evolucion_ventas_dia') ?></h3>
+        <small style="color:#64748b;">
+            <?= __('total_hoy') ?>: <?= $simboloMoneda ?> <?php echo number_format($total_hoy, 2); ?>
+        </small>
         </div>
     </div>
 
@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function() {
             datasets: [
 
                 {
-                    label: "Ventas de hoy",
+                    label: "<?= __('ventas_hoy') ?>",
                     data: dataHoy,
                     borderColor: "#0061f2",
                     backgroundColor: "rgba(0,97,242,0.10)",
@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 },
 
                 {
-                    label: "Ventas de ayer",
+                    label: "<?= __('ventas_ayer') ?>",
                     data: dataAyer,
                     hidden: <?php echo $mostrar_ayer ? 'false' : 'true'; ?>,
                     borderColor: "#94a3b8",

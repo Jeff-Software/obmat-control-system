@@ -43,25 +43,68 @@ function renderVentasEspera() {
     const tbody = document.getElementById('carrito-body');
 
     if (ventasEspera.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="5" class="carrito-vacio">En espera....</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="5" class="carrito-vacio">${LANG.enEspera}</td></tr>`;
         return;
     }
 
     tbody.innerHTML = ventasEspera.map(v => `
         <tr>
-            <td>🕐 ${v.hora} — ${v.carrito.length} producto(s)</td>
-            <td>
-                <button onclick="recuperarVenta(${v.id})" 
-                    style="padding:6px 12px;background:#0061f2;color:#fff;border:none;border-radius:6px;cursor:pointer;">
-                    Recuperar
-                </button>
-                <button onclick="eliminarEspera(${v.id})" 
-                    style="padding:6px 12px;background:#ef4444;color:#fff;border:none;border-radius:6px;cursor:pointer;margin-left:5px;">
-                    Eliminar
-                </button>
+            <td>🕐 ${v.hora} — ${v.carrito.length} ${LANG.productos}</td>
+            <td class="acciones">
+
+            <button class="btn-recuperar" onclick="recuperarVenta(${v.id})">
+                <i class="fa-solid fa-cart-shopping"></i>
+                ${LANG.recuperar}
+            </button>
+
+
+            <button class="btn-eliminar" onclick="eliminarEspera(${v.id})">
+                <i class="fa-solid fa-trash"></i>
+                ${LANG.eliminar}
+            </button>
+
+
+            <button class="btn-imprimir" onclick="imprimirEspera(${v.id})">
+                <i class="fa-solid fa-print"></i>
+                ${LANG.imprimir}
+            </button>
+
             </td>
         </tr>
     `).join('');
+}
+
+function imprimirEspera(id) {
+
+    const venta = ventasEspera.find(v => v.id === id);
+
+    if (!venta) {
+        alert("Venta no encontrada");
+        return;
+    }
+
+
+    const form = document.createElement("form");
+
+    form.method = "POST";
+    form.action = "exportar_ventas_espera.php";
+    form.target = "_blank";
+
+
+    const input = document.createElement("input");
+
+    input.type = "hidden";
+    input.name = "venta";
+    input.value = JSON.stringify(venta);
+
+
+    form.appendChild(input);
+
+    document.body.appendChild(form);
+
+    form.submit();
+
+    form.remove();
 }
 
 // Cargar al iniciar

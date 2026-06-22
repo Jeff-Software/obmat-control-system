@@ -23,7 +23,7 @@ if (!$result) {
 ?>
 
 <div class="card-header-clean-split">
-    <h3>Productos más rentables</h3>
+    <h3><?= __('productos_rentables') ?></h3>
 </div>
 
 <div class="products-list-container">
@@ -47,7 +47,7 @@ if ($result->num_rows > 0) {
                 </span>
 
                 <span class="product-qty-text">
-                    Top rentabilidad
+                    <?= __('top_rentabilidad') ?>
                 </span>
             </div>
 
@@ -64,7 +64,7 @@ if ($result->num_rows > 0) {
 ?>
 
     <div style="padding:20px;text-align:center;color:#64748b;">
-        No hay datos de rentabilidad disponibles.
+        <?= __('sin_rentabilidad') ?>
     </div>
 
 <?php

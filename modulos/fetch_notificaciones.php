@@ -12,6 +12,8 @@ if ($result->num_rows > 0) {
         echo '</div>';
     }
 } else {
-    echo '<p style="padding: 15px; font-size: 12px; color: #94a3b8; text-align: center;">No hay alertas pendientes.</p>';
+    echo '<p style="padding: 15px; font-size: 12px; color: #94a3b8; text-align: center;">'
+    . __('sin_alertas_pendientes') .
+    '</p>';
 }
 ?>

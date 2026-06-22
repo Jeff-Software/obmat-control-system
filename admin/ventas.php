@@ -16,7 +16,7 @@ require_once('../config/config_global.php');
 <head>
     <link rel="stylesheet" href="../assets/css/admin.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <title>Historial de Ventas</title>
+    <title><?= __('historial_ventas') ?></title>
 </head>
 <body>
 

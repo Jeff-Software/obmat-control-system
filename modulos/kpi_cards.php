@@ -32,9 +32,9 @@ $utilidad = $res_utilidad['utilidad_total'];
             <i class="fas fa-shopping-bag"></i>
         </div>
         <div class="kpi-content">
-            <span class="kpi-title">VENTAS TOTALES</span>
+            <span class="kpi-title"><?= __('ventas_totales') ?></span>
             <h3 class="kpi-value"><?php echo ($ventas > 0) ? $simboloMoneda . ' ' . number_format($ventas, 2) : $simboloMoneda . ' 0.00'; ?></h3>
-            <span class="kpi-subtext text-green">Total acumulado</span>
+            <span class="kpi-subtext text-green"><?= __('total_acumulado') ?></span>
         </div>
     </div>
 
@@ -43,9 +43,9 @@ $utilidad = $res_utilidad['utilidad_total'];
             <i class="fas fa-chart-line"></i>
         </div>
         <div class="kpi-content">
-            <span class="kpi-title">TICKET PROMEDIO</span>
+            <span class="kpi-title"><?= __('ticket_promedio') ?></span>
             <h3 class="kpi-value"><?= $simboloMoneda ?> <?php echo number_format($ticket_promedio, 2); ?></h3>
-            <span class="kpi-subtext text-green">Por transacción</span>
+            <span class="kpi-subtext text-green"><?= __('por_transaccion') ?></span>
         </div>
     </div>
 
@@ -54,9 +54,9 @@ $utilidad = $res_utilidad['utilidad_total'];
             <i class="fas fa-shopping-cart"></i>
         </div>
         <div class="kpi-content">
-            <span class="kpi-title">TRANSACCIONES</span>
+            <span class="kpi-title"><?= __('transacciones') ?></span>
             <h3 class="kpi-value"><?php echo $transacciones; ?></h3>
-            <span class="kpi-subtext text-green">Ventas realizadas</span>
+            <span class="kpi-subtext text-green"><?= __('ventas_realizadas') ?></span>
         </div>
     </div>
 
@@ -65,9 +65,9 @@ $utilidad = $res_utilidad['utilidad_total'];
             <i class="fas fa-dollar-sign"></i>
         </div>
         <div class="kpi-content">
-            <span class="kpi-title">UTILIDAD ESTIMADA</span>
+            <span class="kpi-title"><?= __('utilidad_estimada') ?></span>
             <h3 class="kpi-value"><?= $simboloMoneda ?> <?php echo number_format($utilidad, 2); ?></h3>
-            <span class="kpi-subtext text-green">Ganancia bruta</span>
+            <span class="kpi-subtext text-green"><?= __('ganancia_bruta') ?></span>
         </div>
     </div>
 

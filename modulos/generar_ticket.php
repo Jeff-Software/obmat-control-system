@@ -3,6 +3,7 @@
 // Usamos 'fpdf/fpdf.php' porque está dentro de tu carpeta obmat_control
 require_once('../fpdf/fpdf.php');
 require_once('../config/conexion.php');
+require_once('../config/config_global.php');
 
 $id_venta = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
@@ -20,6 +21,9 @@ $stmt = $conexion->prepare("SELECT
 $stmt->bind_param("i", $id_venta);
 $stmt->execute();
 $venta = $stmt->get_result()->fetch_assoc();
+
+$metodo = strtolower($venta['metodo_pago']);
+$metodoTraducido = __($metodo);
 
 // Consultar productos
 $stmtDet = $conexion->prepare("SELECT p.nombre, dv.cantidad, dv.precio_unitario 
@@ -52,7 +56,7 @@ $pdf->SetFont('Arial','B',12);
 $pdf->Cell(0,5, utf8_decode($venta['nombre_negocio']),0,1,'C');
 
 $pdf->SetFont('Arial','',8);
-$pdf->Cell(0,4,'Comprobante de Venta',0,1,'C');
+$pdf->Cell(0,4,utf8_decode(__('comprobante_venta')),0,1,'C');
 
 $pdf->Ln(2);
 
@@ -62,17 +66,17 @@ $pdf->Ln(3);
 // Datos de venta
 $pdf->SetFont('Arial','',8);
 
-$pdf->Cell(22,4,'Venta N°:',0,0);
+$pdf->Cell(22,4,utf8_decode(__('venta_numero')),0,0);
 $pdf->Cell(0,4,$id_venta,0,1);
 
-$pdf->Cell(22,4,'Fecha:',0,0);
+$pdf->Cell(22,4,utf8_decode(__('fecha_ticket')),0,0);
 $pdf->Cell(0,4,date('d/m/Y H:i', strtotime($venta['fecha'])),0,1);
 
-$pdf->Cell(22,4,'Cajero:',0,0);
+$pdf->Cell(22,4,utf8_decode(__('cajero_ticket')),0,0);
 $pdf->Cell(0,4,utf8_decode($venta['cajero']),0,1);
 
-$pdf->Cell(22,4,'Pago:',0,0);
-$pdf->Cell(0,4,utf8_decode($venta['metodo_pago']),0,1);
+$pdf->Cell(22,4,utf8_decode(__('pago')),0,0);
+$pdf->Cell(0,4,utf8_decode($metodoTraducido),0,1);
 
 $pdf->Ln(2);
 
@@ -82,10 +86,10 @@ $pdf->Ln(3);
 // Cabecera productos
 $pdf->SetFont('Arial','B',7);
 
-$pdf->Cell(26,5,'Producto',0,0);
-$pdf->Cell(8,5,'Cant',0,0,'C');
-$pdf->Cell(12,5,'P.U',0,0,'R');
-$pdf->Cell(16,5,'Total',0,1,'R');
+$pdf->Cell(26,5,utf8_decode(__('producto_ticket')),0,0);
+$pdf->Cell(8,5,utf8_decode(__('cantidad_ticket')),0,0,'C');
+$pdf->Cell(12,5,utf8_decode(__('precio_ticket')),0,0,'R');
+$pdf->Cell(16,5,utf8_decode(__('total_ticket')),0,1,'R');
 
 $pdf->SetFont('Arial','',7);
 
@@ -175,7 +179,9 @@ $pdf->MultiCell(
     0,
     4,
     utf8_decode(
-        "Gracias por su compra.\nConserve este comprobante."
+        __('gracias_compra').
+        "\n".
+        __('conserve_comprobante')
     ),
     0,
     'C'
@@ -188,7 +194,7 @@ $pdf->SetFont('Arial','I',7);
 $pdf->Cell(
     0,
     4,
-    utf8_decode('Sistema OBMAT CONTROL'),
+    utf8_decode(__('sistema')),
     0,
     1,
     'C'

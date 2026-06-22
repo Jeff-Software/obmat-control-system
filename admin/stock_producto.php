@@ -7,6 +7,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
 }
 
 require_once('../config/conexion.php');
+require_once('../config/config_global.php');
 
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
@@ -128,7 +129,7 @@ $total_paginas = ceil($total / $limite);
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Ingreso de Stock</title>
+    <title><?= __('ingreso_stock') ?></title>
 
     <link rel="stylesheet" href="../assets/css/admin.css">
     <link rel="stylesheet" href="../assets/css/stock_producto.css">
@@ -145,21 +146,21 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
 
     <?php if(isset($_GET['ok'])): ?>
     <div class="mensaje-ok">
-        ✅ Stock actualizado correctamente
+        ✅ <?= __('stock_actualizado') ?>
     </div>
     <?php endif; ?>
 
         <h2><?= htmlspecialchars($producto['nombre']) ?></h2>
 
         <div class="stock-actual">
-            Stock actual:
+            <?= __('stock_actual') ?>:
             <strong><?= $producto['stock'] ?></strong>
         </div>
 
         <form method="POST">
 
             <div class="form-group">
-                <label>Cantidad a ingresar</label>
+                <label><?= __('cantidad_ingresar') ?></label>
 
                 <input
                     type="number"
@@ -170,7 +171,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
             </div>
 
             <div class="form-group">
-                <label>Motivo</label>
+                <label><?= __('motivo') ?></label>
 
                 <input
                     type="text"
@@ -181,22 +182,22 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
             </div>
 
             <button type="submit" class="btn-guardar">
-                Guardar movimiento
+                <?= __('guardar_movimiento') ?>
             </button>
 
         </form>
         <hr>
 
 <div class="stock-history">
-    <h3>Historial de movimientos</h3>
+    <h3><?= __('historial_movimientos') ?></h3>
 
     <table class="tabla-movimientos">
         <thead>
             <tr>
-                <th>Fecha</th>
-                <th>Tipo</th>
-                <th>Cantidad</th>
-                <th>Motivo</th>
+            <th><?= __('fecha') ?></th>
+            <th><?= __('tipo') ?></th>
+            <th><?= __('cantidad') ?></th>
+            <th><?= __('motivo') ?></th>
             </tr>
         </thead>
 
@@ -209,8 +210,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
 
                 <td>
                     <?= $mov['tipo'] == 'entrada'
-                        ? '🟢 Entrada'
-                        : '🔴 Salida'
+                    ? '🟢 ' . __('entrada')
+                    : '🔴 ' . __('salida')
                     ?>
                 </td>
 

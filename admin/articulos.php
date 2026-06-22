@@ -109,7 +109,7 @@ $productos = $conexion
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Gestión de Artículos - Admin</title>
+    <title><?= __('gestion_articulos') ?></title>
     <link rel="stylesheet" href="../assets/css/admin.css">
     <link rel="stylesheet" href="../assets/css/articulos.css">
     <link rel="stylesheet" href="../assets/css/paginacion.css">
@@ -120,31 +120,39 @@ $productos = $conexion
     <?php include('../modulos/sidebar.php'); ?>
     <main class="main-content">
         <header class="dashboard-header">
-            <h2>Gestión de Artículos</h2>
+            <h2><?= __('gestion_articulos') ?></h2>
         </header>
 
         <!-- Formulario para agregar producto -->
         <div class="form-agregar">
-            <h3>Agregar nuevo producto</h3>
+            <h3><?= __('agregar_producto') ?></h3>
             <form action="articulos.php" method="POST" enctype="multipart/form-data" class="form-grid">
-                <input type="text" name="nombre" placeholder="Nombre" required>
-                <input type="number" step="0.01" name="precio" placeholder="Precio" required>
+                <input type="text" name="nombre" placeholder="<?= __('nombre') ?>" required>
+                <input type="number" step="0.01" name="precio" placeholder="<?= __('precio') ?>" required>
                 
-                <input type="number" name="stock" placeholder="Stock" required>
-                <input type="number" name="stock_minimo" placeholder="Stock mínimo" required>
+                <input type="number" name="stock" placeholder="<?= __('stock') ?>" required>
+                <input type="number" name="stock_minimo" placeholder="<?= __('stock_minimo') ?>"required>
                 
-                <input type="text" name="categoria" placeholder="Categoría">
+                <input type="text" name="categoria" placeholder="<?= __('categoria') ?>">
                 <input type="file" name="imagen" class="input-imagen">
                 
-                <textarea name="descripcion" placeholder="Descripción" style="grid-column: span 2;"></textarea>
-                <button type="submit" name="agregar" style="grid-column: span 2;">Agregar producto</button>
+                <textarea name="descripcion" placeholder="<?= __('descripcion') ?>" style="grid-column: span 2;"></textarea>
+                <button type="submit" name="agregar" style="grid-column: span 2;"><?= __('agregar') ?></button>
             </form>
         </div>
 
         <!-- Tabla de productos existentes -->
         <table class="productos-table">
             <thead>
-                <tr><th>ID</th><th>Imagen</th><th>Nombre</th><th>Precio</th><th>Stock</th><th>Stock Mín.</th><th>Categoría</th><th>Acciones</th></tr>
+                <tr><th><?= __('id') ?></th>
+                    <th><?= __('imagen') ?></th>
+                    <th><?= __('nombre') ?></th>
+                    <th><?= __('precio') ?></th>
+                    <th><?= __('stock') ?></th>
+                    <th><?= __('stock_minimo') ?></th>
+                    <th><?= __('categoria') ?></th>
+                    <th><?= __('acciones') ?></th>
+                </tr>
             </thead>
             <tbody>
                 <?php foreach ($productos as $p): ?>
@@ -168,11 +176,11 @@ $productos = $conexion
                     <td><?= htmlspecialchars($p['categoria']) ?></td>
                     <td>
                         <a href="editar_producto.php?id=<?= $p['id'] ?>" class="btn-edit">
-                            Editar
+                            <?= __('editar') ?>
                         </a>
 
                         <a href="stock_producto.php?id=<?= $p['id'] ?>" class="btn-add">
-                            Stock
+                            <?= __('editar_stock') ?>
                         </a>
 
                         <a href="?eliminar=<?= $p['id'] ?>"
@@ -180,7 +188,7 @@ $productos = $conexion
                         <?php if ($configSistema['confirmar_eliminar']) : ?>
                         onclick="return confirm('¿Eliminar?')"
                         <?php endif; ?>>
-                        Eliminar
+                        <?= __('eliminar') ?>
                         </a>
                     </td>
                 </tr>
@@ -191,7 +199,7 @@ $productos = $conexion
 
 <?php if ($pagina > 1): ?>
     <a href="?pagina=<?= $pagina - 1 ?>">
-        ← Anterior
+        ← <?= __('anterior') ?>
     </a>
 <?php endif; ?>
 
@@ -209,7 +217,7 @@ $productos = $conexion
 
 <?php if ($pagina < $totalPaginas): ?>
     <a href="?pagina=<?= $pagina + 1 ?>">
-        Siguiente →
+        <?= __('siguiente') ?> →
     </a>
 <?php endif; ?>
 
@@ -217,7 +225,7 @@ $productos = $conexion
     </main>
     <?php if (isset($_GET['success'])): ?>
             <script>
-                alert('Producto agregado correctamente');
+                alert('<?= __('producto_agregado') ?>');
                 // Limpia la URL para que no vuelva a salir al actualizar
                 window.history.replaceState({}, document.title, "articulos.php");
             </script>
@@ -225,7 +233,7 @@ $productos = $conexion
 
         <?php if (isset($_GET['mensaje']) && $_GET['mensaje'] == 'eliminado'): ?>
             <script>
-                alert('Producto eliminado correctamente');
+                alert('<?= __('producto_eliminado') ?>');
                 window.history.replaceState({}, document.title, "articulos.php");
             </script>
         <?php endif; ?>

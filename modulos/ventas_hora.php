@@ -62,7 +62,7 @@ $valores_js_hora = array_values($valores_finales);
 <div class="dashboard-card">
 
     <div class="card-header-clean">
-        <h3>Ventas por hora del día</h3>
+        <h3><?= __('ventas_por_hora') ?></h3>
     </div>
 
     <div class="hour-chart-wrapper">

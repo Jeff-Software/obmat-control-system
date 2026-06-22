@@ -23,7 +23,7 @@ $productos = $resultado->fetch_all(MYSQLI_ASSOC);
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Artículos | InkaDigital</title>
+    <title><?= __('articulos') ?> | InkaDigital</title>
     <link rel="stylesheet" href="../assets/css/cajero.css">
     <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -46,19 +46,19 @@ $productos = $resultado->fetch_all(MYSQLI_ASSOC);
             <div class="kpi-card">
                 <div class="kpi-icon-box icon-bg-blue">📦</div>
                 <div class="kpi-content">
-                    <span class="kpi-title">TOTAL ARTÍCULOS</span>
+                    <span class="kpi-title"><?= __('total_articulos') ?></span>
                     <span class="kpi-value"><?php echo $total_activos; ?></span>
-                    <span style="font-size:12px;color:#64748b;">Activos</span>
+                    <span style="font-size:12px;color:#64748b;"><?= __('activos') ?></span>
                 </div>
             </div>
             <div class="kpi-card">
                 <div class="kpi-icon-box icon-bg-blue">💰</div>
                 <div class="kpi-content">
-                    <span class="kpi-title">VALOR INVENTARIO</span>
+                    <span class="kpi-title"><?= __('valor_inventario') ?></span>
                     <span class="kpi-value">
                     <?= $configSistema['simbolo'] ?> <?php echo number_format($valor_inventario, 2); ?>
                     </span>                    
-                    <span style="font-size:12px;color:#64748b;">Valor total</span>
+                    <span style="font-size:12px;color:#64748b;"><?= __('valor_total') ?></span>
                 </div>
             </div>
         </div>
@@ -69,11 +69,11 @@ $productos = $resultado->fetch_all(MYSQLI_ASSOC);
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Nombre</th>
-                        <th>Categoría</th>
-                        <th>Precio Compra</th>
-                        <th>Precio Venta</th>
-                        <th>Estado</th>
+                        <th><?= __('nombre') ?></th>
+                        <th><?= __('categoria') ?></th>
+                        <th><?= __('precio_compra') ?></th>
+                        <th><?= __('precio_venta') ?></th>
+                        <th><?= __('estado') ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -91,9 +91,9 @@ $productos = $resultado->fetch_all(MYSQLI_ASSOC);
                         <td><?= $configSistema['simbolo'] ?> <?php echo number_format($p['precio'], 2); ?></td>
                         <td>
                             <?php if ($p['estado'] == 1): ?>
-                                <span class="estado-activo">✅ Activo</span>
+                                <span class="estado-activo">✅ <?= __('activo') ?></span>
                             <?php else: ?>
-                                <span class="estado-inactivo">❌ Inactivo</span>
+                                <span class="estado-inactivo">❌ <?= __('inactivo') ?></span>
                             <?php endif; ?>
                         </td>
                     </tr>
@@ -103,6 +103,62 @@ $productos = $resultado->fetch_all(MYSQLI_ASSOC);
         </div>
 
     </main>
+
+
+<script>
+
+function actualizarFechaSidebar(){
+
+    const ahora = new Date();
+
+
+    const idioma = "<?= $configSistema['idioma'] ?? 'es' ?>";
+
+
+    const formato = idioma === "en"
+        ? "en-US"
+        : "es-PE";
+
+
+    const fecha = ahora.toLocaleDateString(
+        formato,
+        {
+            year:'numeric',
+            month:'long',
+            day:'numeric'
+        }
+    );
+
+
+    const hora = ahora.toLocaleTimeString(
+        formato,
+        {
+            hour:'2-digit',
+            minute:'2-digit'
+        }
+    );
+
+
+    const fechaSidebar = document.getElementById('sidebar-fecha');
+
+
+    if(fechaSidebar){
+
+        fechaSidebar.textContent =
+        fecha + ' ' + hora;
+
+    }
+
+}
+
+
+actualizarFechaSidebar();
+
+setInterval(actualizarFechaSidebar,1000);
+
+
+</script>
+
 
 </body>
 </html>

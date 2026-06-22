@@ -30,13 +30,11 @@ $result = $conexion->query($query);
 
 while($producto = $result->fetch_assoc()) {
 
-    $mensaje = "⚠️ Stock crítico: "
-        . $producto['nombre']
-        . " ("
-        . $producto['stock']
-        . "/"
-        . $producto['stock_minimo']
-        . ")";
+    $mensaje = __('stock_critico', [
+        'name' => $producto['nombre'],
+        'stock' => $producto['stock'],
+        'min' => $producto['stock_minimo']
+    ]);
 
     $insert = $conexion->prepare("
         INSERT INTO notificaciones

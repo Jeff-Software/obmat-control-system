@@ -7,6 +7,7 @@ if (!isset($_SESSION['usuario'])) {
 }
 
 require_once('../config/conexion.php');
+require_once('../config/config_global.php');
 
 // Paginación
 $registrosPorPagina = 8;
@@ -97,7 +98,7 @@ $resultado = $conexion->query($query);
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Movimientos de Stock</title>
+<title><?= __('movimientos_inventario') ?></title>
 
 <link rel="stylesheet" href="../assets/css/admin.css">
 <link rel="stylesheet" href="../assets/css/movimientos_stock.css">
@@ -114,13 +115,13 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     <div class="movimientos-card">
 
         <header class="dashboard-header">
-            <h2>Movimientos de Inventario</h2>
+            <h2><?= __('movimientos_inventario') ?></h2>
         </header>
 
         <form method="GET" class="filtro-fechas">
 
         <div class="campo-filtro">
-            <label>Desde</label>
+            <label><?= __('desde') ?></label>
             <input
                 type="date"
                 name="desde"
@@ -129,7 +130,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         </div>
 
         <div class="campo-filtro">
-            <label>Hasta</label>
+            <label><?= __('hasta') ?></label>
             <input
                 type="date"
                 name="hasta"
@@ -138,11 +139,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         </div>
 
         <button type="submit" class="btn-filtrar">
-            Filtrar
+            <?= __('filtrar') ?>
         </button>
 
         <a href="movimientos_stock.php" class="btn-limpiar">
-            Limpiar
+            <?= __('limpiar') ?>
         </a>
 
     </form>
@@ -151,11 +152,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
 
             <thead>
                 <tr>
-                    <th>Fecha</th>
-                    <th>Producto</th>
-                    <th>Tipo</th>
-                    <th>Cantidad</th>
-                    <th>Motivo</th>
+                <th><?= __('fecha') ?></th>
+                <th><?= __('producto') ?></th>
+                <th><?= __('tipo') ?></th>
+                <th><?= __('cantidad') ?></th>
+                <th><?= __('motivo') ?></th>
                 </tr>
             </thead>
 
@@ -171,9 +172,13 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
 
                     <td>
                         <?php if($row['tipo'] == 'entrada'): ?>
-                            <span class="entrada">🟢 Entrada</span>
+                            <span class="entrada">
+                            🟢 <?= __('entrada') ?>
+                            </span>
                         <?php else: ?>
-                            <span class="salida">🔴 Salida</span>
+                            <span class="salida">
+                            🔴 <?= __('salida') ?>
+                            </span>
                         <?php endif; ?>
                     </td>
 
@@ -220,9 +225,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     <?php endif; ?>
 
 </div>
-
 <?php endif; ?>
-``        
+
 
     </div>
 

@@ -1,6 +1,7 @@
 <?php
 
 require('../config/conexion.php');
+require('../config/config_global.php');
 $config = $conexion->query(
     "SELECT simbolo_moneda FROM configuracion LIMIT 1"
 );
@@ -11,7 +12,7 @@ require('../fpdf/fpdf.php');
 $idVenta = $_GET['id'] ?? 0;
 
 if (!$idVenta) {
-    die("Venta no encontrada");
+    die(__('venta_no_encontrada'));
 }
 
 /* DATOS DE LA VENTA */
@@ -30,7 +31,7 @@ $stmt->execute();
 $venta = $stmt->get_result()->fetch_assoc();
 
 if (!$venta) {
-    die("Venta inexistente");
+    die(__('venta_inexistente'));
 }
 
 /* DETALLE */
@@ -65,7 +66,7 @@ $pdf->SetFont('Arial','B',16);
 $pdf->Cell(0,8,'OBMAT',0,1,'C');
 
 $pdf->SetFont('Arial','',9);
-$pdf->Cell(70,5,utf8_decode('¡Gracias por su compra!'),0,1,'C');
+$pdf->Cell(70,5,utf8_decode(__('gracias_compra')),0,1,'C');
 
 $pdf->Ln(3);
 
@@ -77,16 +78,16 @@ $pdf->Ln(4);
 
 $pdf->SetFont('Arial','',8);
 
-$pdf->Cell(25,5,'Fecha:',0,0);
+$pdf->Cell(25,5,__('fecha').':',0,0);
 $pdf->Cell(45,5,date('d/m/Y', strtotime($venta['fecha'])),0,1);
 
-$pdf->Cell(25,5,'Hora:',0,0);
+$pdf->Cell(25,5,__('hora').':',0,0);
 $pdf->Cell(45,5,date('H:i:s', strtotime($venta['fecha'])),0,1);
 
-$pdf->Cell(25,5,'Factura:',0,0);
+$pdf->Cell(25,5,__('factura').':',0,0);
 $pdf->Cell(45,5,'#'.$venta['id'],0,1);
 
-$pdf->Cell(25,5,'Cajero:',0,0);
+$pdf->Cell(25,5,__('cajero').':',0,0);
 $pdf->Cell(45,5,utf8_decode($venta['cajero']),0,1);
 
 $pdf->Ln(3);
@@ -99,10 +100,10 @@ $pdf->Ln(3);
 
 $pdf->SetFont('Arial','B',7);
 
-$pdf->Cell(28,5,'Producto',0,0);
-$pdf->Cell(10,5,'Cant',0,0,'C');
-$pdf->Cell(14,5,'Precio',0,0,'R');
-$pdf->Cell(18,5,'Total',0,1,'R');
+$pdf->Cell(28,5,__('producto'),0,0);
+$pdf->Cell(10,5,__('cantidad'),0,0,'C');
+$pdf->Cell(14,5,__('precio'),0,0,'R');
+$pdf->Cell(18,5,__('total'),0,1,'R');
 
 $pdf->Cell(70,0,'','T',1);
 
@@ -164,7 +165,7 @@ $pdf->Ln(4);
 
 $pdf->SetFont('Arial','B',9);
 
-$pdf->Cell(40,6,'TOTAL:',0,0);
+$pdf->Cell(40,6,__('total').':',0,0);
 $pdf->Cell(
     30,
     6,
@@ -176,11 +177,11 @@ $pdf->Cell(
 
 $pdf->SetFont('Arial','',8);
 
-$pdf->Cell(40,5,'Metodo de pago:',0,0);
+$pdf->Cell(40,5,__('metodo_pago').':',0,0);
 $pdf->Cell(
     30,
     5,
-    ucfirst($venta['metodo_pago']),
+    __(strtolower($venta['metodo_pago'])),
     0,
     1,
     'R'
@@ -188,7 +189,7 @@ $pdf->Cell(
 
 /* CAMBIO */
 
-$pdf->Cell(40,5,'Cambio:',0,0);
+$pdf->Cell(40,5,__('cambio').':',0,0);
 $pdf->Cell(
     30,
     5,
@@ -209,7 +210,7 @@ $pdf->SetFont('Arial','',8);
 $pdf->Cell(
     70,
     5,
-    utf8_decode('¡Vuelva pronto!'),
+    utf8_decode(__('vuelva_pronto')),
     0,
     1,
     'C'
@@ -218,7 +219,7 @@ $pdf->Cell(
 $pdf->Cell(
     70,
     5,
-    'Conserve su comprobante',
+    utf8_decode(__('conserve_comprobante')),
     0,
     1,
     'C'

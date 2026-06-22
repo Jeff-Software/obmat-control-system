@@ -62,10 +62,10 @@ document.addEventListener('DOMContentLoaded', () => {
             <table class="detalle-table">
                 <thead>
                     <tr>
-                        <th>Producto</th>
-                        <th>Cantidad</th>
-                        <th>Precio unitario</th>
-                        <th>Subtotal</th>
+                    <th>${LANG.producto}</th>
+                    <th>${LANG.cantidad}</th>
+                    <th>${LANG.precio_unitario}</th>
+                    <th>${LANG.subtotal}</th>
                     </tr>
                 </thead>
                 <tbody>

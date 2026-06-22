@@ -43,7 +43,7 @@ foreach ($datos as $fila) {
 
 <div class="dashboard-card">
     <div class="card-header-clean">
-        <h3>Métodos de pago</h3>
+        <h3><?= __('metodos_pago') ?></h3>
     </div>
 
     <div class="category-chart-layout">
@@ -71,9 +71,9 @@ foreach ($datos as $fila) {
                         style="background-color: <?php echo $colores[$i]; ?>">
                     </span>
 
-                    <span class="cat-name">
-                        <?php echo ucfirst($fila['metodo_pago']); ?>
-                    </span>
+                <span class="cat-name">
+                    <?= __(strtolower($fila['metodo_pago'])) ?>
+                </span>
                 </div>
 
                 <span class="cat-percentage">

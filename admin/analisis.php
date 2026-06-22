@@ -18,7 +18,7 @@ $num_notif = $stmt->get_result()->fetch_assoc()['total'] ?? 0;
     
     
     <meta charset="UTF-8">
-    <title>Análisis de Ventas | InkaDigital</title>
+    <title><?= __('analisis_ventas') ?> | OBMAT CONTROL</title>
     <link rel="stylesheet" href="../assets/css/admin.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -33,15 +33,18 @@ $num_notif = $stmt->get_result()->fetch_assoc()['total'] ?? 0;
         
         <header class="dashboard-header">
             <div class="dashboard-header-title-block">
-                <h2>Análisis de Ventas</h2>
-                <p>Visualiza el comportamiento y rendimiento de tu minimarket</p>
+            <h2><?= __('analisis_ventas') ?></h2>
+
+            <p>
+            <?= __('analisis_descripcion') ?>
+            </p>
             </div>
 
             </header>
 
         <div class="analisis-nav-bar" style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
             <div class="tabs-analisis">
-                <button class="tab-btn active">Resumen General</button>
+                <button class="tab-btn active"><?= __('resumen_general') ?></button>
             </div>
         </div>
 
@@ -49,38 +52,38 @@ $num_notif = $stmt->get_result()->fetch_assoc()['total'] ?? 0;
     <div class="kpi-row">
         <div class="kpi-card card-ventas">
             <i class="fas fa-shopping-bag"></i>
-            <div><h3>Ventas Totales</h3><p id="kpi-ventas">Cargando...</p></div>
+            <div><h3><?= __('ventas_totales') ?></h3><p id="kpi-ventas"><?= __('cargando') ?></p></div>
         </div>
         <div class="kpi-card card-ganancia">
             <i class="fas fa-money-bill-wave"></i>
-            <div><h3>Ganancia Neta</h3><p id="kpi-ganancia">Cargando...</p></div>
+            <div><h3><?= __('ganancia_neta') ?></h3><p id="kpi-ganancia"><?= __('cargando') ?></p></div>
         </div>
         <div class="kpi-card card-margen">
             <i class="fas fa-chart-line"></i>
-            <div><h3>Margen</h3><p id="kpi-margen">Cargando...</p></div>
+            <div><h3><?= __('margen') ?></h3><p id="kpi-margen"><?= __('cargando') ?></p></div>
         </div>
         <div class="kpi-card card-transacciones">
             <i class="fas fa-exchange-alt"></i>
-            <div><h3>Transacciones</h3><p id="kpi-transacciones">Cargando...</p></div>
+            <div><h3><?= __('transacciones') ?></h3><p id="kpi-transacciones"><?= __('cargando') ?></p></div>
         </div>
     </div>
     
     <div class="kpi-row" style="margin-top: 20px;">
         <div class="kpi-card card-ticket">
             <i class="fas fa-receipt"></i>
-            <div><h3>Ticket Promedio</h3><p id="kpi-ticket">Cargando...</p></div>
+            <div><h3><?= __('ticket_promedio') ?></h3><p id="kpi-ticket"><?= __('cargando') ?></p></div>
         </div>
         <div class="kpi-card card-clientes">
             <i class="fas fa-users"></i>
-            <div><h3>Clientes Atendidos</h3><p id="kpi-clientes">Cargando...</p></div>
+            <div><h3><?= __('clientes_atendidos') ?></h3><p id="kpi-clientes"><?= __('cargando') ?></p></div>
         </div>
         <div class="kpi-card card-productos">
             <i class="fas fa-box-open"></i>
-            <div><h3>Productos Vendidos</h3><p id="kpi-productos">Cargando...</p></div>
+            <div><h3><?= __('productos_vendidos') ?></h3><p id="kpi-productos"><?= __('cargando') ?></p></div>
         </div>
         <div class="kpi-card card-devoluciones">
             <i class="fas fa-undo"></i>
-            <div><h3>Devoluciones</h3><p id="kpi-devoluciones">Cargando...</p></div>
+            <div><h3><?= __('devoluciones') ?></h3><p id="kpi-devoluciones"><?= __('cargando') ?></p></div>
         </div>
     </div>
 </section>
@@ -88,7 +91,7 @@ $num_notif = $stmt->get_result()->fetch_assoc()['total'] ?? 0;
 <div class="analisis-graficos-row">
 
     <div class="chart-container chart-ventas">
-        <h3>Evolución de Ventas (Últimos 7 días)</h3>
+        <h3><?= __('ventas_7_dias') ?></h3>
         <canvas id="ventasChart"></canvas>
     </div>
 
@@ -113,15 +116,29 @@ $num_notif = $stmt->get_result()->fetch_assoc()['total'] ?? 0;
 
 <!-- Barra de estado de actualización -->
 <div class="update-info-bar">
-            <i class="fas fa-info-circle"></i>
-            <span>Los datos se actualizan en tiempo real con la información registrada en el sistema.</span>
-            <span class="update-timestamp" style="margin-left: auto;">
-                Última actualización: <?php echo date('d/m/Y - h:i A'); ?>
-            </span>
-            <button onclick="window.location.reload()" style="background:none; border:none; cursor:pointer; margin-left: 15px; color: #64748b;">
-                <i class="fas fa-sync-alt"></i>
-            </button>
-        </div>
+
+    <div class="update-message">
+        <i class="fas fa-info-circle"></i>
+        <span>
+            <?= __('datos_actualizados') ?>
+        </span>
+    </div>
+
+
+    <div class="update-time">
+
+        <span class="update-timestamp">
+            <?= __('ultima_actualizacion') ?>:
+            <?php echo date('d/m/Y - h:i A'); ?>
+        </span>
+
+        <button onclick="window.location.reload()" class="btn-refresh">
+            <i class="fas fa-sync-alt"></i>
+        </button>
+
+    </div>
+
+</div>
 
     </main>
 
@@ -167,7 +184,7 @@ const simboloMoneda = "<?= $simboloMoneda ?>";
                 data: {
                     labels: data.fechas,
                     datasets: [{
-                        label: 'Ventas ' + simboloMoneda,
+                        label: '<?= __('ventas') ?> ' + simboloMoneda,
                         data: data.totales,
                         borderColor: '#3b82f6',
                         backgroundColor: 'rgba(59,130,246,0.1)',
