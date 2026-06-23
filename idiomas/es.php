@@ -104,7 +104,7 @@ return [
     "cantidad" => "Cantidad",
     "importe" => "Subtotal",
     "carrito_vacio" => "Busca un producto para agregarlo",
-    "lista_espera" => "Waiting list",
+    "lista_espera" => "Lista de espera",
     "cancelar" => "Cancel",
     "resumen_venta" => "Resumen de venta",
     "total_final" => "TOTAL FINAL",
