@@ -9,41 +9,44 @@ if (!isset($configSistema)) {
     <form id="form-regional" action="../modulos/procesar_regional.php" method="POST">
         
         <div class="card-header">
-        <h3><i class="fas fa-globe icon-blue"></i> Configuración Regional</h3>            
-        <p>Ajustes de región, moneda e idioma</p>
+        <h3>
+        <i class="fas fa-globe icon-blue"></i>
+        <?= __('configuracion_regional') ?>
+        </h3>         
+        <p><?= __('ajustes_region') ?></p>
         </div>
         
         <div class="form-grid">
             <div class="form-group">
-                <label>País</label>
+                <label><?= __('pais') ?></label>
                 <select name="pais" class="form-control">
                     <option value="PE" <?= ($configSistema['pais'] == 'PE') ? 'selected' : ''; ?>>
-                        Perú
+                        <?= __('peru') ?>
                     </option>
 
                     <option value="MX" <?= ($configSistema['pais'] == 'MX') ? 'selected' : ''; ?>>
-                        México
+                        <?= __('mexico') ?>
                     </option>
 
                     <option value="CO" <?= ($configSistema['pais'] == 'CO') ? 'selected' : ''; ?>>
-                        Colombia
+                        <?= __('colombia') ?>
                     </option>
 
                     <option value="CL" <?= ($configSistema['pais'] == 'CL') ? 'selected' : ''; ?>>
-                        Chile
+                        <?= __('chile') ?>
                     </option>
 
                     <option value="US" <?= ($configSistema['pais'] == 'US') ? 'selected' : ''; ?>>
-                        Estados Unidos
+                        <?= __('estados_unidos') ?>
                     </option>
 
                     <option value="ES" <?= ($configSistema['pais'] == 'ES') ? 'selected' : ''; ?>>
-                        España
+                        <?= __('espana') ?>
                     </option>
                 </select>
             </div>
             <div class="form-group">
-                <label>Zona Horaria</label>
+                <label><?= __('zona_horaria') ?></label>
 
             <select name="zona_horaria" class="form-control">
 
@@ -80,32 +83,32 @@ if (!isset($configSistema)) {
             </select>
             </div>
             <div class="form-group">
-                <label>Moneda</label>
+                <label><?= __('moneda') ?></label>
 
                 <select name="moneda" class="form-control">
 
                     <option value="PEN"
                         <?= ($configSistema['moneda'] == 'PEN') ? 'selected' : ''; ?>>
-                        Soles (S/ PEN)
+                        <?= __('soles') ?>
                     </option>
 
                     <option value="USD"
                         <?= ($configSistema['moneda'] == 'USD') ? 'selected' : ''; ?>>
-                        Dólares ($ USD)
+                        <?= __('dolares') ?>
                     </option>
 
                     <option value="EUR"
                         <?= ($configSistema['moneda'] == 'EUR') ? 'selected' : ''; ?>>
-                        Euros (€ EUR)
+                        <?= __('euros') ?>
                     </option>
 
                 </select>
             </div>
             <div class="form-group">
-                <label>Idioma</label>
+                <label><?= __('idioma') ?></label>
                 <select name="idioma" class="form-control">
-                    <option value="es" <?php echo ($configSistema['idioma'] == 'es') ? 'selected' : ''; ?>>Español</option>
-                    <option value="en" <?php echo ($configSistema['idioma'] == 'en') ? 'selected' : ''; ?>>Inglés</option>
+                    <option value="es" <?php echo ($configSistema['idioma'] == 'es') ? 'selected' : ''; ?>><?= __('espanol') ?></option>
+                    <option value="en" <?php echo ($configSistema['idioma'] == 'en') ? 'selected' : ''; ?>><?= __('ingles') ?></option>
                 </select>
             </div>
         </div>
@@ -113,13 +116,13 @@ if (!isset($configSistema)) {
         <hr style="border: 0; border-top: 1px solid #eee; margin: 25px 0;">
 
         <div class="card-header">
-            <h3><i class="fas fa-cog icon-blue"></i> Preferencias Generales</h3>
-            <p>Opciones generales del sistema</p>
+            <h3><i class="fas fa-cog icon-blue"></i> <?= __('preferencias_generales') ?></h3>
+            <p><?= __('opciones_generales') ?></p>
         </div>
         
         <div class="preferences-list">
             <div class="pref-item">
-                <span>Mostrar stock cero en ventas</span>
+                <span><?= __('mostrar_stock_cero') ?></span>
                 <label class="switch">
                     <input
                         type="checkbox"
@@ -130,7 +133,7 @@ if (!isset($configSistema)) {
             </div>
 
             <div class="pref-item">
-                <span>Confirmar al eliminar registros</span>
+                <span><?= __('confirmar_eliminar') ?></span>
                 <label class="switch">
                     <input
                         type="checkbox"
@@ -141,7 +144,7 @@ if (!isset($configSistema)) {
             </div>
 
             <div class="pref-item">
-                <span>Sonido en ventas</span>
+                <span><?= __('sonido_ventas') ?></span>
                 <label class="switch">
                     <input
                         type="checkbox"
@@ -152,7 +155,7 @@ if (!isset($configSistema)) {
             </div>
 
             <div class="pref-item">
-                <span>Redondeo en totales</span>
+                <span><?= __('redondeo_totales') ?></span>
                 <label class="switch">
                     <input
                         type="checkbox"
@@ -162,7 +165,7 @@ if (!isset($configSistema)) {
                 </label>
             </div>
             <div class="pref-item">
-                <span>Confirmar al cancelar venta</span>
+                <span><?= __('confirmar_cancelar') ?></span>
 
                 <label class="switch">
                     <input
@@ -178,34 +181,38 @@ if (!isset($configSistema)) {
         <hr style="border: 0; border-top: 1px solid #eee; margin: 25px 0;">
 
         <div class="card-header">
-            <h3><i class="fas fa-database icon-blue"></i> Mantenimiento del Sistema</h3>
-            <p>Acciones para el mantenimiento del sistema</p>
+            <h3><i class="fas fa-database icon-blue"></i> <?= __('mantenimiento_sistema') ?></h3>
+            <p><?= __('acciones_mantenimiento') ?></p>
         </div>
 
         <div class="maintenance-container">
         <div class="maint-card">
             <div class="maint-info">
-                <strong>Limpiar caché del sistema</strong>
-                <p>Elimina archivos temporales y mejora el rendimiento.</p>
+                <strong>
+                <?= __('limpiar_cache') ?>
+                </strong>
+                <p><?= __('limpiar_cache_desc') ?></p>
             </div>
             <button
                 type="button"
                 id="btnLimpiarCache"
                 class="btn-action btn-limpiar">
-                Limpiar
+                <?= __('limpiar') ?>
             </button>
         </div>
 
         <div class="maint-card">
             <div class="maint-info">
-                <strong>Restablecer configuraciones</strong>
-                <p>Restaura las configuraciones por defecto.</p>
+                <strong>
+                <?= __('restablecer_config') ?>
+                </strong>
+                <p><?= __('restablecer_config_desc') ?></p>
             </div>
             <button
                 type="button"
                 id="btnRestablecer"
                 class="btn-action btn-restablecer">
-                Restablecer
+                <?= __('restablecer') ?>
             </button>
         </div>
         </div>

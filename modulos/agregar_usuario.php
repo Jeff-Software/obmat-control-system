@@ -1,7 +1,9 @@
 <?php
 require_once('../config/conexion.php');
 require_once('../config/auth.php');
+require_once('../config/config_global.php');
 require_once('../config/logs.php');
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -29,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if($verificar->get_result()->num_rows > 0){
 
-        $error = "El usuario ya existe";
+        $error = __('usuario_existe');
 
     }else{
 
@@ -81,10 +83,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Nuevo Usuario</title>
+<title><?= __('nuevo_usuario') ?></title>
 
-<link rel="stylesheet" href="../assets/css/admin.css">
-<link rel="stylesheet"
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    <link rel="stylesheet" href="../assets/css/editar_usuario.css">
+    <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
@@ -94,7 +97,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
 
 <main class="main-content">
 
-<div class="user-card">
+<div class="card-form">
 
 <div class="user-header">
     <div class="avatar-user">
@@ -102,71 +105,79 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     </div>
 
     <div>
-        <h3>Nuevo Usuario</h3>
-        <span>Crear administrador o cajero</span>
+    <h3><?= __('nuevo_usuario') ?></h3>
+
+    <span>
+        <?= __('crear_admin_cajero') ?>
+    </span>
     </div>
 </div>
 
 <form method="POST">
 
     <div class="grupo">
-        <label>Nombre Completo</label>
+        <label><?= __('nombre_completo') ?></label>
         <input type="text" name="nombre" required>
     </div>
 
     <div class="grupo">
-        <label>Usuario</label>
+        <label><?= __('usuario') ?></label>
         <input type="text" name="usuario" required>
     </div>
 
     <div class="grupo">
-        <label>Contraseña</label>
+        <label><?= __('contrasena') ?></label>
         <input type="password" name="password" required>
     </div>
 
     <div class="grupo">
-        <label>Rol</label>
+        <label><?= __('rol') ?></label>
 
         <select name="rol" id="rol">
 
-            <option value="admin">
-                Administrador
-            </option>
+        <option value="admin">
+            <?= __('administrador') ?>
+        </option>
 
-            <option value="cajero">
-                Cajero
-            </option>
+        <option value="cajero">
+            <?= __('cajero') ?>
+        </option>
 
         </select>
     </div>
 
 <div class="grupo grupo-full">
-    <label>Estado</label>
+    <label><?= __('estado') ?></label>
 
     <select name="estado">
-        <option value="Activo">Activo</option>
-        <option value="Inactivo">Inactivo</option>
+    <option value="Activo">
+        <?= __('activo') ?>
+    </option>
+
+    <option value="Inactivo">
+        <?= __('inactivo') ?>
+    </option>
     </select>
 </div>
 
 <div class="grupo grupo-full" id="grupoCaja">
-    <label>Caja Asignada</label>
+    <label><?= __('caja_asignada') ?></label>
 
     <input
         type="text"
         name="caja_asignada"
-        placeholder="Ej: CAJA-01">
+        placeholder="<?= __('ej_caja') ?>">
 </div>
 
     <div class="acciones">
 
         <button type="submit" class="btn-guardar">
-            Guardar Usuario
+            <?= __('guardar_usuario') ?>
         </button>
 
         <a href="../admin/usuarios.php"
            class="btn-cancelar">
-            Cancelar
+            <?= __('cancelar') ?>
         </a>
 
     </div>

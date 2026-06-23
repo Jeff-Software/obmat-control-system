@@ -16,7 +16,7 @@ $nombre_usuario = $_SESSION['nombre']
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Configuración del Sistema</title>
+    <title><?= __('configuracion_sistema') ?></title>
     <link rel="stylesheet" href="../assets/css/admin.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="../assets/css/configuracion.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -28,8 +28,13 @@ $nombre_usuario = $_SESSION['nombre']
     <main class="main-content">
         <header class="dashboard-header">
             <div class="dashboard-header-title-block">
-                <h2>Configuración del Sistema</h2>
-                <p>Personaliza los ajustes de tu minimarket</p>
+            <h2>
+                <?= __('configuracion_sistema') ?>
+            </h2>
+
+            <p>
+                <?= __('personaliza_ajustes') ?>
+            </p>
             </div>
         </header>
 
@@ -38,12 +43,14 @@ $nombre_usuario = $_SESSION['nombre']
 
         <div class="save-info">
             <i class="fas fa-exclamation-circle"></i>
-            <span>Cambios pendientes</span>
+            <span>
+                <?= __('cambios_pendientes') ?>
+            </span>
         </div>
 
             <button id="btnGuardarTodo">
                 <i class="fas fa-save"></i>
-                Guardar Todo
+                <?= __('guardar_todo') ?>
             </button>
 
         </div>
@@ -51,7 +58,9 @@ $nombre_usuario = $_SESSION['nombre']
         <!-- Toast independiente -->
         <div id="toast" class="toast">
             <i class="fas fa-check-circle"></i>
-            <span>Configuración guardada correctamente</span>
+            <span>
+            <?= __('config_guardada') ?>
+            </span>
         </div>
 
         <div class="config-grid-layout">
@@ -68,7 +77,9 @@ $nombre_usuario = $_SESSION['nombre']
 
     <div class="alert-info">
     <i class="fas fa-info-circle"></i>
-    <span>Realiza cambios de configuración con precaución. Algunos ajustes pueden afectar el funcionamiento del sistema.</span>
+    <span>
+    <?= __('alerta_configuracion') ?>
+    </span>
 </div>
 
     </main> 
@@ -169,7 +180,7 @@ if(btnGuardar){
 
         if(!formConfig || !formRegional){
             mostrarToast(
-            'No se encontraron los formularios',
+            '<?= __('error_formularios') ?>',
             true
         );
             return;
@@ -185,7 +196,7 @@ if(btnGuardar){
 
         btnGuardar.disabled = true;
         btnGuardar.innerHTML =
-            '<i class="fas fa-spinner fa-spin"></i> Guardando...';
+            '<i class="fas fa-spinner fa-spin"></i> <?= __('guardando') ?>';
 
         fetch('../modulos/guardar_config_completa.php', {
 
@@ -203,10 +214,10 @@ if(btnGuardar){
             saveBar.classList.remove('active');
 
             btnGuardar.innerHTML =
-                '<i class="fas fa-check"></i> Guardado';
+                '<i class="fas fa-check"></i> <?= __('guardado') ?>';
 
             mostrarToast(
-                'Configuración guardada correctamente'
+                '<?= __('config_guardada') ?>'
             );
 
             setTimeout(() => {
@@ -223,7 +234,7 @@ if(btnGuardar){
                 console.error(resp);
 
                 mostrarToast(
-                    'Error al guardar la configuración',
+                    '<?= __('error_guardar_config') ?>',
                     true
                 );
 
@@ -240,7 +251,7 @@ if(btnGuardar){
             console.error(error);
 
             mostrarToast(
-                'Error de conexión',
+                '<?= __('error_conexion') ?>',
                 true
             );
 
@@ -273,13 +284,13 @@ if(btnLimpiarCache){
             if(resp.trim() === 'exito'){
 
                 mostrarToast(
-                    'Caché limpiada correctamente'
+                    '<?= __('cache_limpiada') ?>'
                 );
 
             }else{
 
                 mostrarToast(
-                    'Error al limpiar caché',
+                    '<?= __('error_cache') ?>',
                     true
                 );
 
@@ -303,7 +314,7 @@ if(btnRestablecer){
     btnRestablecer.addEventListener('click', () => {
 
         if(!confirm(
-            '¿Deseas restablecer todas las configuraciones?'
+            '<?= __('confirmar_restablecer') ?>'
         )){
             return;
         }
@@ -315,7 +326,7 @@ if(btnRestablecer){
             if(resp.trim() === 'exito'){
 
                 mostrarToast(
-                    'Configuración restablecida'
+                    '<?= __('config_restablecida') ?>'
                 );
 
                 setTimeout(() => {
@@ -325,7 +336,7 @@ if(btnRestablecer){
             }else{
 
                 mostrarToast(
-                    'Error al restablecer',
+                    '<?= __('error_restablecer') ?>',
                     true
                 );
 

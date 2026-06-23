@@ -22,15 +22,15 @@ $resultado = $conexion->query($sql);
 
 <div class="grafico-card">
 
-    <h3>Top 5 Productos Más Vendidos</h3>
+    <h3><?= __('top_productos') ?></h3>
 
     <table class="tabla-reporte">
 
         <thead>
             <tr>
-                <th>Producto</th>
-                <th>Unidades</th>
-                <th>Ventas</th>
+            <th><?= __('producto') ?></th>
+            <th><?= __('unidades') ?></th>
+            <th><?= __('ventas') ?></th>
             </tr>
         </thead>
 

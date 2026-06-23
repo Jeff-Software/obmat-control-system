@@ -2,6 +2,7 @@
 
 require_once('../fpdf/fpdf.php');
 require_once('../config/conexion.php');
+require_once('../config/config_global.php');
 
 $fechaInicio = $_GET['fechaInicio'] ?? '';
 $fechaFin    = $_GET['fechaFin'] ?? '';
@@ -115,7 +116,7 @@ $topProducto = $resTop->fetch_assoc();
 
 if(!$topProducto){
     $topProducto = [
-        'nombre' => 'Sin datos',
+        'nombre' => __('sin_datos'),
         'total' => 0
     ];
 }
@@ -151,7 +152,7 @@ $metodo = $resMetodo->fetch_assoc();
 
 if(!$metodo){
     $metodo = [
-        'metodo_pago' => 'Sin datos'
+        'metodo_pago' => __('sin_datos')
     ];
 }
 
@@ -190,7 +191,7 @@ $cajero = $resCajero->fetch_assoc();
 
 if(!$cajero){
     $cajero = [
-        'nombre' => 'Sin datos',
+        'nombre' => __('sin_datos'),
         'ventas' => 0
     ];
 }
@@ -238,13 +239,20 @@ $pdf->Cell(190,6,'Tel: '.$empresa['telefono'],0,1,'C');
 $pdf->Ln(5);
 
 $pdf->SetFont('Arial','B',15);
-$pdf->Cell(190,10,'REPORTE GENERAL DE VENTAS',0,1,'C');
+$pdf->Cell(
+190,
+10,
+utf8_decode(__('reporte_general_ventas')),
+0,
+1,
+'C'
+);
 
 $pdf->SetFont('Arial','',10);
 $pdf->Cell(
     190,
     8,
-    'Generado el: '.date('d/m/Y H:i'),
+    utf8_decode(__('generado_el')).': '.date('d/m/Y H:i'),
     0,
     1,
     'C'
@@ -269,7 +277,7 @@ if(!empty($fechaInicio) && !empty($fechaFin)){
     $pdf->Cell(
         190,
         6,
-        'Periodo: Historico completo',
+        utf8_decode(__('periodo').': '.__('historico_completo')),
         0,
         1,
         'C'
@@ -286,7 +294,7 @@ $pdf->SetTextColor(255,255,255);
 $pdf->Cell(
     190,
     8,
-    'RESUMEN EJECUTIVO',
+    utf8_decode(__('resumen_ejecutivo')),
     1,
     1,
     'C',
@@ -297,16 +305,16 @@ $pdf->SetTextColor(0,0,0);
 
 $pdf->SetFont('Arial','',11);
 
-$pdf->Cell(95,8,'Ventas Totales',1);
+$pdf->Cell(95,8,utf8_decode(__('ventas_totales')),1);
 $pdf->Cell(95,8,$moneda.' '.number_format($totalVentas,2),1,1);
 
-$pdf->Cell(95,8,'Transacciones',1);
+$pdf->Cell(95,8,utf8_decode(__('transacciones')),1);
 $pdf->Cell(95,8,$totalTransacciones,1,1);
 
-$pdf->Cell(95,8,'Ticket Promedio',1);
+$pdf->Cell(95,8,utf8_decode(__('ticket_promedio')),1);
 $pdf->Cell(95,8,$moneda.' '.number_format($ticketPromedio,2),1,1);
 
-$pdf->Cell(95,8,'Productos Vendidos',1);
+$pdf->Cell(95,8,utf8_decode(__('productos_vendidos')),1);
 $pdf->Cell(95,8,$totalProductos,1,1);
 
 $pdf->Ln(8);
@@ -319,7 +327,7 @@ $pdf->SetTextColor(255,255,255);
 $pdf->Cell(
     190,
     8,
-    'INDICADORES CLAVE',
+    utf8_decode(__('indicadores_clave')),
     1,
     1,
     'C',
@@ -330,7 +338,7 @@ $pdf->SetTextColor(0,0,0);
 
 $pdf->SetFont('Arial','',10);
 
-$pdf->Cell(95,8,'Producto mas vendido',1);
+$pdf->Cell(95,8,utf8_decode(__('producto_mas_vendido')),1);
 $pdf->Cell(
     95,
     8,
@@ -339,16 +347,23 @@ $pdf->Cell(
     1
 );
 
-$pdf->Cell(95,8,'Metodo de pago preferido',1);
+$pdf->Cell(95,8,utf8_decode(__('metodo_pago_preferido')),1);
 $pdf->Cell(
     95,
     8,
-    ucfirst($metodo['metodo_pago']),
+    utf8_decode(__(
+        strtolower($metodo['metodo_pago'])
+    )),
     1,
     1
 );
 
-$pdf->Cell(95,8,'Mejor cajero',1);
+$pdf->Cell(
+    95,
+    8,
+    utf8_decode(__('mejor_cajero')),
+    1
+);
 $pdf->Cell(
     95,
     8,
@@ -357,7 +372,7 @@ $pdf->Cell(
     1
 );
 
-$pdf->Cell(95,8,'Productos con stock critico',1);
+$pdf->Cell(95,8,utf8_decode(__('productos_stock_critico')),1);
 $pdf->Cell(
     95,
     8,
@@ -376,7 +391,7 @@ $pdf->SetTextColor(255,255,255);
 $pdf->Cell(
     190,
     8,
-    'ANALISIS DEL REPORTE',
+    utf8_decode(__('analisis_reporte')),
     1,
     1,
     'C',
@@ -390,23 +405,38 @@ $pdf->SetFont('Arial','',10);
 $analisis = '';
 
 if($totalVentas > 1000){
-    $analisis .= '* El volumen de ventas es saludable.'."\n";
+
+    $analisis .= '* '.__('ventas_saludables')."\n";
+
 }else{
-    $analisis .= '* Las ventas pueden incrementarse mediante promociones.'."\n";
+
+    $analisis .= '* '.__('ventas_promociones')."\n";
+
 }
+
 
 if($ticketPromedio >= 20){
-    $analisis .= '* El ticket promedio es favorable.'."\n";
+
+    $analisis .= '* '.__('ticket_favorable')."\n";
+
 }else{
-    $analisis .= '* Se recomienda impulsar ventas cruzadas.'."\n";
+
+    $analisis .= '* '.__('impulsar_ventas_cruzadas')."\n";
+
 }
+
 
 if($stockCritico > 0){
-    $analisis .= '* Existen productos que requieren reposicion inmediata.'."\n";
+
+    $analisis .= '* '.__('reposicion_inmediata')."\n";
+
 }
 
-$analisis .= '* El metodo de pago dominante es '.ucfirst($metodo['metodo_pago']).'.';
-
+$analisis .= '* '.__('metodo_pago_dominante').' : '.
+utf8_decode(__(
+    strtolower($metodo['metodo_pago'])
+)).
+'.';
 $pdf->MultiCell(
     190,
     7,
@@ -424,7 +454,7 @@ $pdf->SetTextColor(255,255,255);
 $pdf->Cell(
     190,
     8,
-    'OBSERVACIONES',
+    utf8_decode(__('observaciones')),
     1,
     1,
     'C',
@@ -438,11 +468,7 @@ $pdf->SetFont('Arial','I',10);
 $pdf->MultiCell(
     190,
     7,
-    utf8_decode(
-        "Este reporte ha sido generado automáticamente por el sistema OBMAT CONTROL. ".
-        "La información presentada permite evaluar el desempeño comercial, ".
-        "el comportamiento de ventas y el control del inventario del negocio."
-    ),
+    utf8_decode(__('observacion_pdf')),
     1
 );
 
@@ -452,7 +478,7 @@ $pdf->SetFont('Arial','I',8);
 $pdf->Cell(
     190,
     5,
-    'OBMAT CONTROL - Sistema de Gestion Comercial',
+    utf8_decode(__('sistema_gestion_comercial')),
     0,
     1,
     'C'

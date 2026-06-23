@@ -1,6 +1,7 @@
 <?php
 require_once('../config/conexion.php');
 require_once('../config/auth.php');
+require_once('../config/traducir_logs.php');
 
 $limite = 10;
 $pagina = isset($_GET['pagina'])
@@ -205,11 +206,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
         <h2>
             <i class="fas fa-clipboard-list"></i>
-            Auditoría del Sistema
+            <?= __('auditoria_sistema') ?>
         </h2>
 
         <p>
-            Registro de actividades realizadas por los usuarios.
+            <?= __('registro_actividades') ?>
         </p>
 
     </div>
@@ -227,7 +228,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         </div>
 
         <div>
-            <span>Total Eventos</span>
+            <span><?= __('total_eventos') ?></span>
             <h3><?= $resumen['total_logs'] ?></h3>
         </div>
 
@@ -242,7 +243,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         </div>
 
         <div>
-            <span>Inicios de sesión</span>
+            <span><?= __('inicios_sesion') ?></span>
             <h3><?= $resumen['total_logins'] ?></h3>
         </div>
 
@@ -255,7 +256,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         </div>
 
         <div>
-            <span>Cierres de sesión</span>
+            <span><?= __('cierres_sesion') ?></span>
             <h3><?= $resumen['total_logouts'] ?></h3>
         </div>
 
@@ -270,7 +271,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         </div>
 
         <div>
-            <span>Usuarios creados</span>
+            <span><?= __('usuarios_creados') ?></span>
             <h3><?= $resumen['total_creaciones'] ?></h3>
         </div>
 
@@ -285,7 +286,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         </div>
 
         <div>
-            <span>Usuarios editados</span>
+            <span><?= __('usuarios_editados') ?></span>
             <h3><?= $resumen['total_ediciones'] ?></h3>
         </div>
 
@@ -300,7 +301,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         </div>
 
         <div>
-            <span>Cambios de estado</span>
+            <span><?= __('cambios_estado') ?></span>
             <h3><?= $resumen['total_estados'] ?></h3>
         </div>
 
@@ -309,7 +310,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 </div>
 
     <p class="contador-logs">
-        Se encontraron <?= $totalLogs ?> registros.
+        <?= $totalLogs ?> <?= __('registros_encontrados') ?>
     </p>
 
 
@@ -319,7 +320,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     <select name="usuario">
 
         <option value="">
-            Todos los usuarios
+            <?= __('todos_usuarios') ?>
         </option>
 
         <?php while($u = $usuarios->fetch_assoc()): ?>
@@ -339,32 +340,32 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     <select name="accion">
 
     <option value="">
-        Todas las acciones
+        <?= __('todas_acciones') ?>
     </option>
 
     <option value="login"
         <?= $filtroAccion == 'login' ? 'selected' : '' ?>>
-        Inicios de sesión
+        <?= __('accion_login') ?>
     </option>
 
     <option value="logout"
         <?= $filtroAccion == 'logout' ? 'selected' : '' ?>>
-        Cierres de sesión
+        <?= __('accion_logout') ?>
     </option>
 
     <option value="crear"
         <?= $filtroAccion == 'crear' ? 'selected' : '' ?>>
-        Creación de usuarios
+        <?= __('accion_crear') ?>
     </option>
 
     <option value="editar"
         <?= $filtroAccion == 'editar' ? 'selected' : '' ?>>
-        Edición de usuarios
+        <?= __('accion_editar') ?>
     </option>
 
     <option value="estado"
         <?= $filtroAccion == 'estado' ? 'selected' : '' ?>>
-        Cambios de estado
+        <?= __('accion_estado') ?>
     </option>
 
 </select>
@@ -381,23 +382,40 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     
 
     <button type="submit" class="btn-filtrar">
-        Filtrar
+        <?= __('filtrar') ?>
     </button>
 
 
     <a href="<?= $_SERVER['PHP_SELF'] ?>" class="btn-limpiar">
-        Limpiar
+        <?= __('limpiar') ?>
     </a>
 
-    <a href="exportar_logs_pdf.php" class="btn-exportar-pdf">
-        <i class="fas fa-file-pdf"></i>
-        PDF
-    </a>
+    <a href="exportar_logs_excel.php?
+    usuario=<?= $filtroUsuario ?>&
+    accion=<?= $filtroAccion ?>&
+    desde=<?= $filtroDesde ?>&
+    hasta=<?= $filtroHasta ?>"
+    class="btn-exportar">
 
-    <a href="exportar_logs_excel.php" class="btn-exportar">
-        <i class="fas fa-file-excel"></i>
-        Excel
+    <i class="fas fa-file-excel"></i>
+
+    <?= __('excel') ?>
+
     </a>
+    
+    <a href="exportar_logs_pdf.php?
+    usuario=<?= $filtroUsuario ?>&
+    accion=<?= $filtroAccion ?>&
+    desde=<?= $filtroDesde ?>&
+    hasta=<?= $filtroHasta ?>"
+    class="btn-exportar-pdf">
+
+    <i class="fas fa-file-pdf"></i>
+
+    <?= __('pdf') ?>
+
+    </a>
+    
 </form>
 
     <!-- BUSCADOR -->
@@ -407,12 +425,12 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         <input
             type="text"
             id="buscarLog"
-            placeholder="Buscar usuario o acción...">
+            placeholder="<?= __('buscar_usuario_accion') ?>">
 
     </div>
 
         <p class="ultima-actividad">
-            Último evento:
+            <?= __('ultimo_evento') ?>:
             <?= date('d/m/Y H:i', strtotime($rowUltimo['fecha'])) ?>
         </p>
 
@@ -425,10 +443,10 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
             <thead>
 
                 <tr>
-                    <th>ID</th>
-                    <th>Usuario</th>
-                    <th>Acción</th>
-                    <th>Fecha</th>
+                <th><?= __('id') ?></th>
+                <th><?= __('usuario') ?></th>
+                <th><?= __('accion') ?></th>
+                <th><?= __('fecha') ?></th>
                 </tr>
 
             </thead>
@@ -473,7 +491,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
                         <span class="<?= $badge ?>">
 
-                            <?= htmlspecialchars($row['accion']) ?>
+                            <?= htmlspecialchars(
+                                traducirAccionLog($row['accion'])
+                            ) ?>
 
                         </span>
 

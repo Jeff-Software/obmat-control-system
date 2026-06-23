@@ -1,6 +1,7 @@
 <?php
 require_once('../config/conexion.php');
 require_once('../config/auth.php');
+require_once('../config/config_global.php');
 require_once('../config/logs.php');
 
 $id = $_GET['id'] ?? null;
@@ -96,8 +97,9 @@ $usuario = $conexion->query("SELECT * FROM usuarios WHERE id = $id")->fetch_asso
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Editar Usuario</title>
+    <title><?= __('editar_usuario') ?></title>
     <link rel="stylesheet" href="../assets/css/admin.css">
+    <link rel="stylesheet" href="../assets/css/editar_usuario.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
@@ -117,15 +119,15 @@ $usuario = $conexion->query("SELECT * FROM usuarios WHERE id = $id")->fetch_asso
             </div>
         </div>
 
-        <h2>Editar Usuario</h2>
+        <h2><?= __('editar_usuario') ?></h2>
         <p class="subtitulo">
-            Modifica la información del usuario seleccionado.
+            <?= __('modificar_usuario') ?>
         </p>
 
         <form method="POST">
 
             <div class="grupo">
-                <label>Nombre Completo</label>
+                <label><?= __('nombre_completo') ?></label>
                 <input type="text"
                        name="nombre"
                        value="<?= htmlspecialchars($usuario['nombre']) ?>"
@@ -133,7 +135,7 @@ $usuario = $conexion->query("SELECT * FROM usuarios WHERE id = $id")->fetch_asso
             </div>
 
             <div class="grupo">
-                <label>Usuario</label>
+                <label><?= __('usuario') ?></label>
                 <input type="text"
                        name="usuario"
                        value="<?= htmlspecialchars($usuario['usuario']) ?>"
@@ -141,42 +143,42 @@ $usuario = $conexion->query("SELECT * FROM usuarios WHERE id = $id")->fetch_asso
             </div>
 
             <div class="grupo">
-                <label>Rol</label>
+                <label><?= __('rol') ?></label>
                 <select name="rol">
 
                     <option value="admin"
                     <?= $usuario['rol']=='admin'?'selected':'' ?>>
-                    Administrador
+                    <?= __('administrador') ?>
                     </option>
 
                     <option value="cajero"
                     <?= $usuario['rol']=='cajero'?'selected':'' ?>>
-                    Cajero
+                    <?= __('cajero') ?>
                     </option>
 
                 </select>
             </div>
 
             <div class="grupo">
-                <label>Estado</label>
+                <label><?= __('estado') ?></label>
 
                 <select name="estado">
 
                     <option value="Activo"
                     <?= $usuario['estado']=='Activo'?'selected':'' ?>>
-                    Activo
+                    <?= __('activo') ?>
                     </option>
 
                     <option value="Inactivo"
                     <?= $usuario['estado']=='Inactivo'?'selected':'' ?>>
-                    Inactivo
+                    <?= __('inactivo') ?>
                     </option>
 
                 </select>
             </div>
 
             <div class="grupo">
-                <label>Caja Asignada</label>
+                <label><?= __('caja_asignada') ?></label>
 
                 <input type="text"
                        name="caja_asignada"
@@ -184,25 +186,25 @@ $usuario = $conexion->query("SELECT * FROM usuarios WHERE id = $id")->fetch_asso
             </div>
 
             <div class="grupo">
-                <label>Nueva Contraseña</label>
+                <label><?= __('nueva_contrasena') ?></label>
 
                 <input type="password"
                        name="password">
 
                 <small>
-                    Dejar vacío para mantener la contraseña actual
+                    <?= __('dejar_vacio_password') ?>
                 </small>
             </div>
 
             <div class="acciones">
 
                 <button type="submit" class="btn-guardar">
-                    Guardar Cambios
+                    <?= __('guardar_cambios') ?>
                 </button>
 
                 <a href="../admin/usuarios.php"
                    class="btn-cancelar">
-                    Cancelar
+                    <?= __('cancelar') ?>
                 </a>
 
             </div>

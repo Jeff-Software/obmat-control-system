@@ -1,0 +1,494 @@
+/* ==============================
+   FORMULARIO EDITAR USUARIO
+============================== */
+
+
+.main-content-form{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    padding:40px;
+    background:#f8fafc;
+}
+
+
+.card-form{
+
+    width:650px;
+    background:white;
+
+    padding:30px;
+
+    border-radius:16px;
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,.08);
+
+}
+
+
+/* CABECERA USUARIO */
+
+.user-header{
+
+    display:flex;
+    align-items:center;
+    gap:15px;
+
+    margin-bottom:25px;
+
+}
+
+
+.avatar-user{
+
+    width:55px;
+    height:55px;
+
+    border-radius:50%;
+
+    background:#2563eb;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:white;
+    font-size:22px;
+
+}
+
+
+.user-info-header h3{
+
+    font-size:20px;
+
+    color:#1e293b;
+
+}
+
+
+.user-info-header span{
+
+    color:#64748b;
+
+}
+
+
+
+/* TITULO */
+
+
+.card-form h2{
+
+    margin-bottom:5px;
+
+    color:#1e293b;
+
+}
+
+
+.subtitulo{
+
+    color:#64748b;
+
+    margin-bottom:25px;
+
+}
+
+
+
+/* FORMULARIO */
+
+form{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:16px;
+
+}
+
+
+
+/* CAMPOS */
+
+.grupo{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:6px;
+
+}
+
+
+
+.grupo label{
+
+    font-size:14px;
+
+    font-weight:600;
+
+    color:#334155;
+
+}
+
+
+
+.grupo input,
+.grupo select{
+
+
+    width:100%;
+
+    height:42px;
+
+    padding:0 12px;
+
+
+    border:1px solid #cbd5e1;
+
+    border-radius:8px;
+
+
+    font-size:14px;
+
+    outline:none;
+
+
+    transition:.2s;
+
+}
+
+
+
+.grupo input:focus,
+.grupo select:focus{
+
+    border-color:#2563eb;
+
+    box-shadow:
+    0 0 0 3px rgba(37,99,235,.15);
+
+}
+
+
+
+.grupo small{
+
+    color:#64748b;
+
+    font-size:12px;
+
+}
+
+
+
+/* BOTONES */
+
+
+.acciones{
+
+    display:flex;
+
+    gap:15px;
+
+    margin-top:15px;
+
+}
+
+
+
+.btn-guardar{
+
+    flex:1;
+
+    height:42px;
+
+    border:none;
+
+    border-radius:8px;
+
+    background:#2563eb;
+
+    color:white;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+}
+
+
+
+.btn-guardar:hover{
+
+    background:#1d4ed8;
+
+}
+
+
+
+.btn-cancelar{
+
+    flex:1;
+
+    height:42px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+
+    border-radius:8px;
+
+    background:#e2e8f0;
+
+    color:#334155;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+}
+
+
+.btn-cancelar:hover{
+
+    background:#cbd5e1;
+
+}
+
+/* ============================
+   NUEVO USUARIO
+============================ */
+
+
+.pagina-usuarios .main-content{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:flex-start;
+
+    padding:40px;
+
+    background:#f8fafc;
+
+}
+
+
+
+.pagina-usuarios .card-form{
+
+    width:650px;
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:16px;
+
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,.08);
+
+}
+
+
+
+/* CABECERA */
+
+.pagina-usuarios .user-header{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-bottom:25px;
+
+}
+
+
+
+.pagina-usuarios .avatar-user{
+
+    width:55px;
+
+    height:55px;
+
+    border-radius:50%;
+
+    background:#2563eb;
+
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+
+    color:white;
+
+    font-size:22px;
+
+}
+
+
+
+/* FORMULARIO */
+
+
+.pagina-usuarios form{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:16px;
+
+}
+
+
+
+.pagina-usuarios .grupo{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:6px;
+
+}
+
+
+
+.pagina-usuarios .grupo label{
+
+
+    font-size:14px;
+
+    font-weight:600;
+
+    color:#334155;
+
+}
+
+
+
+.pagina-usuarios input,
+.pagina-usuarios select{
+
+
+    width:100%;
+
+    height:42px;
+
+    padding:0 12px;
+
+
+    border:1px solid #cbd5e1;
+
+
+    border-radius:8px;
+
+
+    font-size:14px;
+
+
+    outline:none;
+
+}
+
+
+
+.pagina-usuarios input:focus,
+.pagina-usuarios select:focus{
+
+
+    border-color:#2563eb;
+
+
+    box-shadow:
+    0 0 0 3px rgba(37,99,235,.15);
+
+}
+
+
+
+/* BOTONES */
+
+
+.pagina-usuarios .acciones{
+
+
+    display:flex;
+
+    gap:15px;
+
+    margin-top:15px;
+
+}
+
+
+
+.pagina-usuarios .btn-guardar,
+.pagina-usuarios .btn-cancelar{
+
+
+    flex:1;
+
+    height:42px;
+
+    border-radius:8px;
+
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+
+
+.pagina-usuarios .btn-guardar{
+
+    border:none;
+
+    background:#2563eb;
+
+    color:white;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+}
+
+
+
+.pagina-usuarios .btn-cancelar{
+
+    background:#e2e8f0;
+
+    color:#334155;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+}

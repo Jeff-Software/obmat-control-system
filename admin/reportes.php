@@ -195,7 +195,7 @@ $mejorCajero = $resCajero->fetch_assoc();
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Reportes</title>
+<title><?= __('centro_reportes') ?></title>
 
 <link rel="stylesheet" href="../assets/css/admin.css">
 <link rel="stylesheet" href="../assets/css/reportes.css?v=<?php echo time(); ?>">
@@ -211,14 +211,17 @@ $mejorCajero = $resCajero->fetch_assoc();
 
 <div class="reportes-header">
     <div>
-        <h2>Centro de Reportes</h2>
-        <p>Análisis financiero e indicadores del negocio</p>
+    <h2><?= __('centro_reportes') ?></h2>
+
+    <p>
+    <?= __('analisis_financiero') ?>
+    </p>
     </div>
 
     <div class="estado-reporte">
         <span class="badge-live">
             <i class="fas fa-circle"></i>
-            Datos actualizados
+            <?= __('datos_actualizados') ?>
         </span>
     </div>
 </div>
@@ -229,7 +232,7 @@ $mejorCajero = $resCajero->fetch_assoc();
 
     <div class="reporte-titulo">
         <i class="fas fa-chart-line"></i>
-        Ventas
+        <?= __('ventas') ?>
     </div>
 
     <form method="GET" class="filtro-form">
@@ -242,12 +245,12 @@ $mejorCajero = $resCajero->fetch_assoc();
 
         <button type="submit" class="btn-primary">
             <i class="fas fa-filter"></i>
-            Filtrar
+            <?= __('filtrar') ?>
         </button>
 
         <a href="reportes.php" class="btn-secondary">
             <i class="fas fa-rotate-left"></i>
-            Limpiar
+            <?= __('limpiar') ?>
         </a>
 
     </form>
@@ -262,7 +265,7 @@ $mejorCajero = $resCajero->fetch_assoc();
         class="btn-primary">
 
         <i class="fas fa-file-pdf"></i>
-        Generar PDF
+        <?= __('generar_pdf') ?>
 
     </button>
 
@@ -275,7 +278,7 @@ $mejorCajero = $resCajero->fetch_assoc();
     <div class="kpi-card">
         <i class="fas fa-money-bill-wave"></i>
         <div>
-            <h3>Ventas Totales</h3>
+            <h3><?= __('ventas_totales') ?></h3>
             <p><?= $simboloMoneda ?> <?php echo number_format($totalVentas,2); ?></p>
 
             <?php if($variacionVentas !== null): ?>
@@ -290,14 +293,14 @@ $mejorCajero = $resCajero->fetch_assoc();
 
                     <?php echo number_format(abs($variacionVentas),1); ?>%
 
-                    vs mes anterior
+                    <?= __('vs_mes_anterior') ?>
 
                 </span>
 
             <?php else: ?>
 
                 <span class="kpi-change">
-                    Sin datos comparativos
+                    <?= __('sin_datos_comparativos') ?>
                 </span>
 
             <?php endif; ?>
@@ -307,7 +310,7 @@ $mejorCajero = $resCajero->fetch_assoc();
     <div class="kpi-card">
         <i class="fas fa-shopping-cart"></i>
         <div>
-            <h3>Transacciones</h3>
+            <h3><?= __('transacciones') ?></h3>
             <p><?php echo $totalTransacciones; ?></p>
         </div>
     </div>
@@ -315,7 +318,7 @@ $mejorCajero = $resCajero->fetch_assoc();
     <div class="kpi-card">
         <i class="fas fa-receipt"></i>
         <div>
-            <h3>Ticket Promedio</h3>
+            <h3><?= __('ticket_promedio') ?></h3>
             <p><?= $simboloMoneda ?> <?php echo number_format($ticketPromedio,2); ?></p>
         </div>
     </div>
@@ -323,7 +326,7 @@ $mejorCajero = $resCajero->fetch_assoc();
     <div class="kpi-card">
         <i class="fas fa-box"></i>
         <div>
-            <h3>Productos Vendidos</h3>
+            <h3><?= __('productos_vendidos') ?></h3>
             <p><?php echo $totalProductos; ?></p>
         </div>
     </div>
@@ -332,21 +335,23 @@ $mejorCajero = $resCajero->fetch_assoc();
 <div class="resumen-ejecutivo">
 
     <div class="resumen-item">
-        🏆 Producto líder:
+        🏆 <?= __('producto_lider') ?>:
         <strong>
             <?php echo htmlspecialchars($topProducto['nombre'] ?? 'N/A'); ?>
         </strong>
     </div>
 
     <div class="resumen-item">
-        💳 Método preferido:
+        💳 <?= __('metodo_preferido') ?>:
         <strong>
-            <?php echo ucfirst($metodoFavorito['metodo_pago'] ?? 'N/A'); ?>
+            <?php echo __(
+                strtolower($metodoFavorito['metodo_pago'] ?? 'n/a')
+            ); ?>
         </strong>
     </div>
 
     <div class="resumen-item">
-        👤 Mejor cajero:
+        👤 <?= __('mejor_cajero') ?>:
         <strong>
             <?php echo htmlspecialchars($mejorCajero['nombre'] ?? 'N/A'); ?>
         </strong>
@@ -357,12 +362,12 @@ $mejorCajero = $resCajero->fetch_assoc();
 <div class="reportes-graficos">
 
     <div class="grafico-card">
-        <h3>Evolución de Ventas por Mes</h3>
+        <h3><?= __('evolucion_ventas_mes') ?></h3>
         <canvas id="ventasMesChart"></canvas>
     </div>
 
     <div class="grafico-card">
-        <h3>Ventas por Método de Pago</h3>
+        <h3><?= __('ventas_metodo_pago') ?></h3>
         <canvas id="metodoPagoChart"></canvas>
     </div>
 
@@ -378,7 +383,7 @@ $mejorCajero = $resCajero->fetch_assoc();
 
 <div class="info-footer">
     <i class="fas fa-info-circle"></i>
-    Los reportes se generan en base a las ventas registradas en el sistema.
+    <?= __('reportes_generados') ?>
 </div>
 
 </main>

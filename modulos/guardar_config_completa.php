@@ -49,6 +49,60 @@ $redondeo_totales   = isset($_POST['redondeo_totales']) ? 1 : 0;
 $confirmar_cancelar_venta = isset($_POST['confirmar_cancelar_venta']) ? 1 : 0;
 
 // ======================
+// LOGO
+// ======================
+
+if(isset($_FILES['logo']) && $_FILES['logo']['error'] == 0){
+
+
+    $nombreArchivo = $_FILES['logo']['name'];
+
+    $tmp = $_FILES['logo']['tmp_name'];
+
+
+    $extension = strtolower(
+        pathinfo(
+            $nombreArchivo,
+            PATHINFO_EXTENSION
+        )
+    );
+
+
+    $permitidos = [
+        'jpg',
+        'jpeg',
+        'png'
+    ];
+
+
+    if(in_array($extension,$permitidos)){
+
+
+        $nuevoNombre =
+        'logo_'.time().'.'.$extension;
+
+
+        move_uploaded_file(
+            $tmp,
+            '../assets/img/'.$nuevoNombre
+        );
+
+
+        $logo = $nuevoNombre;
+
+
+        $conexion->query("
+        UPDATE configuracion
+        SET logo='$logo'
+        WHERE id=1
+        ");
+
+
+    }
+
+}
+
+// ======================
 // UPDATE
 // ======================
 

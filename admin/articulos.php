@@ -134,7 +134,23 @@ $productos = $conexion
                 <input type="number" name="stock_minimo" placeholder="<?= __('stock_minimo') ?>"required>
                 
                 <input type="text" name="categoria" placeholder="<?= __('categoria') ?>">
-                <input type="file" name="imagen" class="input-imagen">
+                <label for="imagen" class="btn-subir-imagen">
+
+                <i class="fas fa-image"></i>
+                <?= __('seleccionar_imagen') ?>
+
+                </label>
+
+
+                <input 
+                type="file" 
+                id="imagen"
+                name="imagen"
+                class="input-imagen"
+                accept="image/png,image/jpeg,image/webp"
+                hidden>
+
+
                 
                 <textarea name="descripcion" placeholder="<?= __('descripcion') ?>" style="grid-column: span 2;"></textarea>
                 <button type="submit" name="agregar" style="grid-column: span 2;"><?= __('agregar') ?></button>
@@ -237,5 +253,29 @@ $productos = $conexion
                 window.history.replaceState({}, document.title, "articulos.php");
             </script>
         <?php endif; ?>
+
+        <script>
+
+const inputImagen = document.getElementById('imagen');
+const nombreArchivo = document.getElementById('nombreArchivo');
+
+
+inputImagen.addEventListener('change', function(){
+
+    if(this.files.length > 0){
+
+        nombreArchivo.textContent =
+        this.files[0].name;
+
+    }else{
+
+        nombreArchivo.textContent =
+        "<?= __('ningun_archivo') ?>";
+
+    }
+
+});
+
+</script>
 </body>
 </html>

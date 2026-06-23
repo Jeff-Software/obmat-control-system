@@ -1,6 +1,8 @@
 <?php
 
 require_once('../config/conexion.php');
+require_once('../config/config_global.php');
+
 
 $sql = "
 SELECT
@@ -14,13 +16,21 @@ GROUP BY metodo_pago
 
 $resultado = $conexion->query($sql);
 
+
 $metodos = [];
 $montos = [];
 
+
 while($fila = $resultado->fetch_assoc()){
-    $metodos[] = ucfirst($fila['metodo_pago']);
+
+    $metodo = strtolower($fila['metodo_pago']);
+
+    $metodos[] = __($metodo);
+
     $montos[] = floatval($fila['total_ventas']);
+
 }
+
 
 echo json_encode([
     'metodos' => $metodos,

@@ -22,15 +22,15 @@ $resultado = $conexion->query($sql);
 
 <div class="grafico-card">
 
-    <h3>Ventas por Cajero</h3>
+    <h3><?= __('ventas_cajero') ?></h3>
 
     <table class="tabla-reporte">
 
         <thead>
             <tr>
-                <th>Cajero</th>
-                <th>Transacciones</th>
-                <th>Total Vendido</th>
+            <th><?= __('cajero') ?></th>
+            <th><?= __('cantidad_transacciones') ?></th>
+            <th><?= __('total_vendido') ?></th>
             </tr>
         </thead>
 

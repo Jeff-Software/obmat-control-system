@@ -342,4 +342,294 @@ return [
 
 
 'stock_actualizado' => 'Stock actualizado correctamente',
+// PDF Reporte
+
+'reporte_general_ventas'=>'REPORTE GENERAL DE VENTAS',
+'generado_el'=>'Generado el',
+'periodo'=>'Periodo',
+'historico_completo'=>'Histórico completo',
+
+'resumen_ejecutivo'=>'RESUMEN EJECUTIVO',
+
+'producto_mas_vendido'=>'Producto más vendido',
+'metodo_pago_preferido'=>'Método de pago preferido',
+'productos_stock_critico'=>'Productos con stock crítico',
+
+'analisis_reporte'=>'ANÁLISIS DEL REPORTE',
+
+'observaciones'=>'OBSERVACIONES',
+
+'sistema_gestion_comercial'=>'OBMAT CONTROL - Sistema de Gestión Comercial',
+// Métodos de pago
+
+'transferencia' => 'Transferencia',
+// Reportes
+
+'centro_reportes' => 'Centro de Reportes',
+'analisis_financiero' => 'Análisis financiero e indicadores del negocio',
+
+'generar_pdf' => 'Generar PDF',
+
+'ventas_totales' => 'Ventas Totales',
+'transacciones' => 'Transacciones',
+'ticket_promedio' => 'Ticket Promedio',
+'productos_vendidos' => 'Productos Vendidos',
+
+'vs_mes_anterior' => 'vs mes anterior',
+'sin_datos_comparativos' => 'Sin datos comparativos',
+
+
+// Resumen
+
+'producto_lider' => 'Producto líder',
+'metodo_preferido' => 'Método preferido',
+'mejor_cajero' => 'Mejor cajero',
+
+
+// Gráficos
+
+'evolucion_ventas_mes' => 'Evolución de Ventas por Mes',
+'ventas_metodo_pago' => 'Ventas por Método de Pago',
+'ventas_cajero' => 'Ventas por Cajero',
+
+
+// Tablas
+
+'cantidad_transacciones' => 'Transacciones',
+'total_vendido' => 'Total Vendido',
+
+'top_productos' => 'Top 5 Productos Más Vendidos',
+
+
+// Footer
+
+'reportes_generados' => 'Los reportes se generan en base a las ventas registradas en el sistema.',
+'metodo_pago_dominante'=>'Método de pago dominante',
+'observacion_pdf'=>'Este reporte ha sido generado automáticamente por el sistema OBMAT CONTROL. La información presentada permite evaluar el desempeño comercial, el comportamiento de ventas y el control del inventario del negocio.',
+// Análisis automático PDF
+
+'ventas_saludables' => 'El volumen de ventas es saludable.',
+'ventas_promociones' => 'Las ventas pueden incrementarse mediante promociones.',
+
+'ticket_favorable' => 'El ticket promedio es favorable.',
+'impulsar_ventas_cruzadas' => 'Se recomienda impulsar ventas cruzadas.',
+
+'reposicion_inmediata' => 'Existen productos que requieren reposición inmediata.',
+'indicadores_clave' => 'INDICADORES CLAVE',
+'sin_datos' => 'Sin datos',
+// Auditoría
+
+'auditoria_sistema' => 'Auditoría del Sistema',
+'registro_actividades' => 'Registro de actividades realizadas por los usuarios.',
+
+'total_eventos' => 'Total Eventos',
+'inicios_sesion' => 'Inicios de sesión',
+'cierres_sesion' => 'Cierres de sesión',
+'usuarios_creados' => 'Usuarios creados',
+'usuarios_editados' => 'Usuarios editados',
+'cambios_estado' => 'Cambios de estado',
+
+'registros_encontrados' => 'registros encontrados.',
+
+'todos_usuarios' => 'Todos los usuarios',
+'todas_acciones' => 'Todas las acciones',
+
+'crear_usuario' => 'Creación de usuarios',
+'editar_usuario' => 'Edición de usuarios',
+
+
+
+'buscar_usuario_accion' => 'Buscar usuario o acción...',
+
+'ultimo_evento' => 'Último evento',
+
+
+'usuario' => 'Usuario',
+'accion' => 'Acción',
+
+
+'pdf' => 'PDF',
+'excel' => 'Excel',
+
+'accion_login' => 'Inicio de sesión',
+'accion_logout' => 'Cierre de sesión',
+'accion_crear' => 'Creación de usuarios',
+'accion_editar' => 'Edición de usuarios',
+'accion_estado' => 'Cambios de estado',
+
+// Logs
+
+'log_inicio_sesion' => 'Inicio de sesión',
+'log_cierre_sesion' => 'Cierre de sesión',
+
+'log_creo_usuario' => 'Creó usuario',
+
+'log_edito_usuario' => 'Editó usuario',
+
+'log_cambio_estado_usuario' => 'Cambió estado del usuario ID',
+
+
+'reporte_auditoria'=>'REPORTE DE AUDITORÍA',
+'reporte_generado'=>'Generado el',
+'resumen_actividad'=>'RESUMEN DE ACTIVIDAD',
+'ultimos_movimientos'=>'ÚLTIMOS MOVIMIENTOS',
+'usuario_eliminado'=>'Usuario eliminado',
+'auditoria_footer'=>'OBMAT CONTROL - Auditoría del Sistema',
+
+'observacion_auditoria'=>'Este reporte muestra las actividades registradas por los usuarios del sistema, incluyendo accesos, cierres de sesión, creación de usuarios, modificaciones y cambios de estado.',
+
+
+'estado_activo'=>'Activo',
+'estado_inactivo'=>'Inactivo',
+
+'a'=>'a',
+// Auditoria tabla
+// Usuarios
+
+'gestion_usuarios' => 'Gestión de Usuarios',
+'administra_usuarios' => 'Administra los usuarios del sistema',
+
+'total_usuarios' => 'Total Usuarios',
+'administradores' => 'Administradores',
+'cajeros' => 'Cajeros',
+
+'bucar_usuario' => 'Buscar usuario por nombre, correo o rol...',
+
+'nuevo_usuario' => 'Nuevo Usuario',
+
+
+'nombre_completo' => 'NOMBRE COMPLETO',
+
+'rol' => 'ROL',
+
+'ultimo_acceso' => 'ÚLTIMO ACCESO',
+
+
+'nunca' => 'Nunca',
+
+
+
+'desactivar_usuario' => '¿Desactivar usuario?',
+'activar_usuario' => '¿Activar usuario?',
+
+'no_hay_usuarios' => 'No hay usuarios registrados.',
+
+'info_cajero' => 'Los usuarios con rol Cajero solo pueden realizar ventas y consultar productos.',
+
+'error_propia_cuenta' => '⚠️ No puedes desactivar tu propia cuenta.',
+// Editar usuario
+
+
+'modificar_usuario' => 'Modifica la información del usuario seleccionado.',
+
+
+'administrador' => 'Administrador',
+
+
+'caja_asignada' => 'Caja Asignada',
+
+'nueva_contrasena' => 'Nueva Contraseña',
+
+'dejar_vacio_password' => 'Dejar vacío para mantener la contraseña actual',
+
+'crear_admin_cajero' => 'Crear administrador o cajero',
+
+
+'contrasena' => 'Contraseña',
+
+
+'ej_caja' => 'Ej: CAJA-01',
+
+'guardar_usuario' => 'Guardar Usuario',
+
+
+'usuario_existe'=>'El usuario ya existe',
+
+'configuracion_sistema'=>'Configuración del Sistema',
+'personaliza_ajustes'=>'Personaliza los ajustes de tu minimarket',
+
+'cambios_pendientes'=>'Cambios pendientes',
+'guardar_todo'=>'Guardar Todo',
+
+'config_guardada'=>'Configuración guardada correctamente',
+
+'alerta_configuracion'=>'Realiza cambios de configuración con precaución. Algunos ajustes pueden afectar el funcionamiento del sistema.',
+
+
+'error_formularios'=>'No se encontraron los formularios',
+
+'guardando'=>'Guardando...',
+'guardado'=>'Guardado',
+
+'error_guardar_config'=>'Error al guardar la configuración',
+
+'error_conexion'=>'Error de conexión',
+
+'cache_limpiada'=>'Caché limpiada correctamente',
+
+'error_cache'=>'Error al limpiar caché',
+
+'confirmar_restablecer'=>'¿Deseas restablecer todas las configuraciones?',
+
+'config_restablecida'=>'Configuración restablecida',
+
+'error_restablecer'=>'Error al restablecer',
+'informacion_negocio'=>'Información del Negocio',
+
+'nombre_negocio'=>'Nombre del Negocio',
+'ruc_dni'=>'RUC / DNI',
+'direccion'=>'Dirección',
+'teléfono'=>'Teléfono',
+'correo_electronico'=>'Correo Electrónico',
+'sitio_web'=>'Sitio Web',
+
+'logo_negocio'=>'Logo del Negocio',
+'cambiar_logo'=>'Cambiar Logo',
+'formatos_logo'=>'Formatos: JPG, PNG. Máx. 2MB',
+
+'descripcion_negocio'=>'Descripción del Negocio',
+
+
+'configuracion_regional'=>'Configuración Regional',
+'ajustes_region'=>'Ajustes de región, moneda e idioma',
+
+'pais'=>'País',
+'peru'=>'Perú',
+'mexico'=>'México',
+'colombia'=>'Colombia',
+'chile'=>'Chile',
+'estados_unidos'=>'Estados Unidos',
+'espana'=>'España',
+
+'zona_horaria'=>'Zona Horaria',
+
+'moneda'=>'Moneda',
+'soles'=>'Soles (S/ PEN)',
+'dolares'=>'Dólares ($ USD)',
+'euros'=>'Euros (€ EUR)',
+
+'idioma'=>'Idioma',
+'espanol'=>'Español',
+'ingles'=>'Inglés',
+
+
+'preferencias_generales'=>'Preferencias Generales',
+'opciones_generales'=>'Opciones generales del sistema',
+
+'mostrar_stock_cero'=>'Mostrar stock cero en ventas',
+'sonido_ventas'=>'Sonido en ventas',
+'redondeo_totales'=>'Redondeo en totales',
+'confirmar_cancelar'=>'Confirmar al cancelar venta',
+
+
+'mantenimiento_sistema'=>'Mantenimiento del Sistema',
+'acciones_mantenimiento'=>'Acciones para el mantenimiento del sistema',
+
+'limpiar_cache'=>'Limpiar caché del sistema',
+'limpiar_cache_desc'=>'Elimina archivos temporales y mejora el rendimiento.',
+
+'restablecer_config'=>'Restablecer configuraciones',
+'restablecer_config_desc'=>'Restaura las configuraciones por defecto.',
+'restablecer'=>'Restablecer',
+'ningun_archivo' => 'Ningún archivo seleccionado',
 ];

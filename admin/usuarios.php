@@ -1,7 +1,8 @@
 <?php
 
 require_once('../config/conexion.php');
-require_once('../config/auth.php'); 
+require_once('../config/auth.php');
+require_once('../config/config_global.php');
 
 $limite = 10; // usuarios por página
 
@@ -50,8 +51,9 @@ $total_paginas = ceil($total_usuarios / $limite);
     <main class="main-content">
         <header class="dashboard-header">
             <div class="dashboard-header-title-block">
-                <h2>Gestión de Usuarios</h2>
-                <p>Administra los usuarios del sistema</p>
+            <h2><?= __('gestion_usuarios') ?></h2>
+
+            <p><?= __('administra_usuarios') ?></p>
             </div>
 
             <?php if(isset($_GET['error'])): ?>
@@ -62,7 +64,7 @@ $total_paginas = ceil($total_usuarios / $limite);
                 switch($_GET['error']){
 
                     case 'propia_cuenta':
-                        echo "⚠️ No puedes desactivar tu propia cuenta.";
+                        echo __('error_propia_cuenta');
                         break;
 
                 }
@@ -77,15 +79,15 @@ $total_paginas = ceil($total_usuarios / $limite);
         <section class="kpi-container-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 25px;">
             <div class="kpi-card">
                 <i class="fas fa-users" style="color: #3b82f6;"></i>
-                <div><h3>Total Usuarios</h3><p><?php echo $kpi['total_usuarios']; ?></p></div>
+                <div><h3><?= __('total_usuarios') ?></h3><p><?php echo $kpi['total_usuarios']; ?></p></div>
             </div>
             <div class="kpi-card">
                 <i class="fas fa-user-shield" style="color: #8b5cf6;"></i>
-                <div><h3>Administradores</h3><p><?php echo $kpi['total_admin']; ?></p></div>
+                <div><h3><?= __('administradores') ?></h3><p><?php echo $kpi['total_admin']; ?></p></div>
             </div>
             <div class="kpi-card">
                 <i class="fas fa-cash-register" style="color: #10b981;"></i>
-                <div><h3>Cajeros</h3><p><?php echo $kpi['total_cajeros']; ?></p></div>
+                <div><h3><?= __('cajeros') ?></h3><p><?php echo $kpi['total_cajeros']; ?></p></div>
             </div>
         </section>
 
@@ -95,24 +97,24 @@ $total_paginas = ceil($total_usuarios / $limite);
                 <input
                 type="text"
                 id="buscadorUsuarios"
-                placeholder="Buscar usuario por nombre, correo o rol..."
+                placeholder="<?= __('bucar_usuario') ?>"
                 style="padding: 10px; width: 400px; border: 1px solid #ddd; border-radius: 8px;">
                 <a href="../modulos/agregar_usuario.php" class="btn-primary">
                     <i class="fas fa-plus"></i>
-                    Nuevo Usuario
+                    <?= __('nuevo_usuario') ?>
                 </a>
             </div>
 
             <table class="data-table" style="width: 100%; border-collapse: collapse;">
                 <thead>
                     <tr style="text-align: left; border-bottom: 1px solid #eee;">
-                        <th style="padding: 15px;">ID</th>
-                        <th style="padding: 15px;">NOMBRE COMPLETO</th>
-                        <th style="padding: 15px;">USUARIO</th>
-                        <th style="padding: 15px;">ROL</th>
-                        <th style="padding: 15px;">ESTADO</th>
-                        <th style="padding: 15px;">ÚLTIMO ACCESO</th>
-                        <th style="padding: 15px;">ACCIONES</th>
+                        <th style="padding: 15px;"><?= __('id') ?></th>
+                        <th style="padding: 15px;"><?= __('nombre_completo') ?></th>
+                        <th style="padding: 15px;"><?= __('usuario') ?></th>
+                        <th style="padding: 15px;"><?= __('rol') ?></th>
+                        <th style="padding: 15px;"><?= __('estado') ?></th>
+                        <th style="padding: 15px;"><?= __('ultimo_acceso') ?></th>
+                        <th style="padding: 15px;"><?= __('acciones') ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -142,7 +144,10 @@ $total_paginas = ceil($total_usuarios / $limite);
                                         : '#dc2626'; ?>;
                                     "
                                 >
-                                    <?php echo $row['estado']; ?>
+                                    <?= $row['estado']=='Activo'
+                                    ? __('activo')
+                                    : __('inactivo')
+                                    ?>
                                 </span>
 
                             </td>
@@ -151,7 +156,7 @@ $total_paginas = ceil($total_usuarios / $limite);
                                 if (!empty($row['ultimo_acceso'])) {
                                     echo date('d/m/Y - h:i A', strtotime($row['ultimo_acceso'])); 
                                 } else {
-                                    echo '<span style="color: #94a3b8; font-style: italic;">Nunca</span>';
+                                    echo '<span style="color: #94a3b8; font-style: italic;">'.__('nunca').'</span>';
                                 }
                                 ?>
                             </td>
@@ -167,7 +172,7 @@ $total_paginas = ceil($total_usuarios / $limite);
                             <?php if($row['estado'] == 'Activo'): ?>
 
                                 <a href="../admin/cambiar_estado_usuario.php?id=<?php echo $row['id']; ?>&estado=Inactivo"
-                                onclick="return confirm('¿Desactivar usuario?');"
+                                onclick="return confirm('<?= __('desactivar_usuario') ?>');"
                                 style="color:#10b981; text-decoration:none;">
 
                                     <i class="fas fa-user-slash"></i>
@@ -177,7 +182,7 @@ $total_paginas = ceil($total_usuarios / $limite);
                             <?php else: ?>
 
                                 <a href="../admin/cambiar_estado_usuario.php?id=<?php echo $row['id']; ?>&estado=Activo"
-                                onclick="return confirm('¿Activar usuario?');"
+                                onclick="return confirm('<?= __('activar_usuario') ?>');"
                                 style="color:#ef4444; text-decoration:none;">
 
                                     <i class="fas fa-user-check"></i>
@@ -191,7 +196,7 @@ $total_paginas = ceil($total_usuarios / $limite);
                     <?php endwhile; ?>
                 <?php else: ?>
                     <tr>
-                        <td colspan="7" style="padding: 20px; text-align: center;">No hay usuarios registrados.</td>
+                        <td colspan="7" style="padding: 20px; text-align: center;"><?= __('no_hay_usuarios') ?></td>
                     </tr>
                 <?php endif; ?>
             </tbody>
@@ -219,7 +224,7 @@ $total_paginas = ceil($total_usuarios / $limite);
         </div>
 
         <div class="info-footer" style="margin-top: 20px; padding: 15px; background: #f0f7ff; color: #0066cc; border-radius: 8px; font-size: 14px;">
-            <i class="fas fa-info-circle"></i> Los usuarios con rol Cajero solo pueden realizar ventas y consultar productos.
+            <i class="fas fa-info-circle"></i> <?= __('info_cajero') ?>
         </div>
     </main>
 

@@ -12,8 +12,22 @@ $configSistema = $conexion
 
 
 // Zona horaria del sistema
-if (!empty($configSistema['zona_horaria'])) {
-    date_default_timezone_set($configSistema['zona_horaria']);
+if (
+    !empty($configSistema['zona_horaria']) &&
+    in_array(
+        $configSistema['zona_horaria'],
+        timezone_identifiers_list()
+    )
+) {
+
+    date_default_timezone_set(
+        $configSistema['zona_horaria']
+    );
+
+}else{
+
+    date_default_timezone_set('America/Lima');
+
 }
 
 
